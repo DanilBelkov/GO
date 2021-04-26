@@ -103,6 +103,16 @@ namespace Go.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap EnabledPoint {
+            get {
+                object obj = ResourceManager.GetObject("EnabledPoint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flora_2 {
             get {
                 object obj = ResourceManager.GetObject("flora_2", resourceCulture);
@@ -336,6 +346,16 @@ namespace Go.Properties {
         internal static System.Drawing.Bitmap plus_zoom {
             get {
                 object obj = ResourceManager.GetObject("plus_zoom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Point {
+            get {
+                object obj = ResourceManager.GetObject("Point", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

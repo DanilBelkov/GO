@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-
+using System.Linq;
 
 namespace Go.Items
 {
@@ -11,6 +11,16 @@ namespace Go.Items
     {
         public Item CurrentItem;
         public double distance;
+
+        static public ItemDistanceTo GetItemDT(List<ItemDistanceTo> IDT, Item item)
+        {
+            foreach(var itemIDT in IDT)
+            {
+                if (itemIDT.CurrentItem.Equals(item))
+                    return itemIDT;
+            }
+            return IDT.Last();
+        }
         static public List<Item> IDT_to_Items(List<ItemDistanceTo> IDT)
         {
             if (IDT != null)
@@ -40,6 +50,7 @@ namespace Go.Items
         protected Form1 _form;
 
         private static int _id = 0;
+        private static int _sizePanel = 6;
 
         public Item(Point point)
         {
@@ -61,7 +72,7 @@ namespace Go.Items
             _form = form;
             Sequence = seq;
             TypeItem = type;
-            CreatePanel(4);
+            CreatePanel();
             FindNearItems(allItems);
             //FixNearItems();
         }
@@ -69,7 +80,7 @@ namespace Go.Items
         public void SetPosition(Point point)
         {
             CurrentPoint = point;
-            CreatePanel(4);
+            CreatePanel();
             CurrentCircle = new Circle(point, 40);
         }
         public void RemoveNearItem(Item item)
@@ -83,13 +94,15 @@ namespace Go.Items
             }
         }
 
-        private void CreatePanel(int sizePanel)
+        private void CreatePanel()
         {
             NewPanel = new Panel();
-            NewPanel.Location = new Point(CurrentPoint.X * _form.Scale_img / 100 - sizePanel / 2, CurrentPoint.Y * _form.Scale_img / 100 - sizePanel / 2);
-            NewPanel.Size = new Size(sizePanel, sizePanel);
-            NewPanel.Name = "Point_panel_" + ID;
-            NewPanel.BackColor = Color.Black;
+            NewPanel.Location = new Point(CurrentPoint.X * _form.Scale_img / 100 - _sizePanel / 2, CurrentPoint.Y * _form.Scale_img / 100 - _sizePanel / 2);
+            NewPanel.Size = new Size(_sizePanel, _sizePanel);
+            NewPanel.Name = ID.ToString();
+            NewPanel.BackgroundImage = Properties.Resources.Point;
+            NewPanel.BackgroundImageLayout = ImageLayout.Zoom;
+            //NewPanel.BackColor = Color.Black;
             NewPanel.Click += new EventHandler(_form.anyPanel_Click);
 
             _form.GetPictureBox.Controls.Add(NewPanel);
@@ -147,28 +160,8 @@ namespace Go.Items
             foreach(var itemFixed in listFixed)
             {
                 NearItems.Remove(itemFixed);
+                itemFixed.CurrentItem.NearItems.Remove(ItemDistanceTo.GetItemDT(NearItems, this));
             }
-        }
-        public List<ItemDistanceTo> Difference(List<ItemDistanceTo> list, List<Item> zone)
-        {
-            GraphicsPath path = new GraphicsPath();
-            Point[] p = new Point[zone.Count];
-            for (int i = 0; i < zone.Count; i++)
-            {
-                p[i] = zone[i].CurrentPoint;
-            }
-            path.AddLines(p);
-            for(int i = 0; i < list.Count ; i++)
-            {
-                if(path.IsVisible(list[i].CurrentItem.CurrentPoint) && !InvisibleZone.ContainsInBorder(zone, list[i].CurrentItem))
-                {
-                    //list[i].CurrentItem.RemoveNearItem(this); 
-                    list.Remove(list[i]);
-                    i--;
-                }
-            }
-
-            return list;
         }
         public override bool Equals(Object point)
         {

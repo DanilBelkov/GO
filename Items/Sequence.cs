@@ -249,27 +249,32 @@ namespace Go.Items
         public override bool Cross(Ray ray)
         {
             Ray newRay;
-            for (int i = 1; i < items.Count; i++)
+            try
             {
-                newRay = new Ray(items[i - 1].CurrentPoint, items[i].CurrentPoint);
+                for (int i = 1; i < items.Count; i++)
+                {
+                    newRay = new Ray(items[i - 1].CurrentPoint, items[i].CurrentPoint);
+                    if (ray.IsCross(newRay))
+                    {
+                        Point crossPoint = ray.Cross(newRay);
+                        if (newRay.ContainsInner(crossPoint) && ray.ContainsInner(crossPoint))
+                            return true;
+                    }
+
+                    //if (ray.to_P == items[i - 1].CurrentPoint || ray.to_P == items[i].CurrentPoint)    //ray.ContainsInner(crossPoint) &&
+                    //    return false;
+                }
+                newRay = new Ray(items.Last().CurrentPoint, items.First().CurrentPoint);
                 if (ray.IsCross(newRay))
                 {
                     Point crossPoint = ray.Cross(newRay);
-                    if (newRay.ContainsInner(crossPoint))
+                    if (ray.ContainsInner(crossPoint) && newRay.ContainsInner(crossPoint))
                         return true;
                 }
-
-                //if (ray.to_P == items[i - 1].CurrentPoint || ray.to_P == items[i].CurrentPoint)    //ray.ContainsInner(crossPoint) &&
-                //    return false;
             }
-            newRay = new Ray(items.Last().CurrentPoint, items.First().CurrentPoint);
-            if (ray.IsCross(newRay))
+            catch
             {
-                Point crossPoint = ray.Cross(newRay);
-                if (ray.ContainsInner(crossPoint) && newRay.ContainsInner(crossPoint))
-                    return true;
             }
-
             return false;
         }
         override public void SetItems(List<Item> items)
@@ -305,146 +310,6 @@ namespace Go.Items
                 //_form.GetPictureBox.Controls.Add(_panelArea);
             }
         }
-        //public int CrossArea(Ray ray)
-        //{
-        //    int countCross = 0;
-        //    if (items.Count != 0)
-        //    {
-        //        Ray rayTemp;
-        //        Point point_1 = Point.Empty, point_2 = Point.Empty, point_temp;
-        //        bool IsPreviousMatch = false;
-
-        //        for (int i = 1; i < items.Count; i++)
-        //        {
-        //            rayTemp = new Ray(items[i - 1].CurrentPoint, items[i].CurrentPoint);
-        //            //// совпадающие лучи
-        //            if(ray.IsMatch(rayTemp))
-        //            {
-        //                return 1;
-        //                //IsPreviousMatch = true;
-        //            }
-        //            else if(IsPreviousMatch)
-        //            {
-        //                //if (items[i - 1].CurrentPoint == ray.to_P)
-        //                    //return 1;
-        //            }
-        //            ////
-        //            if (ray.IsCross(rayTemp))
-        //            {
-        //                point_temp = ray.Cross(rayTemp);
-
-        //                if(rayTemp.Contains(point_temp) && (point_temp != point_1 && point_temp != point_2))
-        //                {
-        //                    countCross++;
-        //                    if (point_1 == Point.Empty)
-        //                        point_1 = point_temp;
-        //                    else
-        //                        point_2 = point_temp;
-        //                }
-        //            }
-        //        }
-                
-        //        rayTemp = new Ray(items.Last().CurrentPoint, items.First().CurrentPoint);
-        //        // если совпадает с последним лучем
-        //        if (ray.IsMatch(rayTemp))
-        //            return 1;
-        //        point_temp = ray.Cross(rayTemp);
-        //        if (ray.IsCross(rayTemp) && rayTemp.Contains(point_temp) && point_temp != point_1)
-        //            countCross++;
-        //    }
-        //    return countCross;
-        //}
-        public Item GetNearestItem(Item item)
-        {
-            Item nearestItem = null;
-            double minDistance = 1000;
-            foreach (var itemArea in items)
-            {
-                double temp = Ray.Distance(item.CurrentPoint, itemArea.CurrentPoint);
-                if (temp < minDistance)
-                {
-                    minDistance = temp;
-                    nearestItem = itemArea;
-                }
-
-            }
-            return nearestItem;
-        }
-        public List<Item> GetNearestWall(Item from, Item between, Item to)
-        {
-            List<Item> LeftWall = new List<Item>();
-            List<Item> RightWall = new List<Item>();
-            Item temp = between;
-            while (!temp.Equals(from) && !temp.Equals(to))
-            {
-                LeftWall.Add(temp.Previous);
-                temp = temp.Previous;
-            }
-            LeftWall.Reverse();
-            LeftWall.Add(between);
-            // если точек всего две
-            if (LeftWall.Count == 1)
-            {
-                if (between.Previous.Equals(from))
-                    LeftWall.Add(from);
-                if (between.Next.Equals(to))
-                    LeftWall.Add(to);
-                return LeftWall;
-            }
-            temp = between;
-            while (!temp.Equals(from) && !temp.Equals(to))
-            {
-                RightWall.Add(temp.Next);
-                temp = temp.Next;
-            }
-            LeftWall.AddRange(RightWall);
-            return LeftWall;
-        }
-
-        public List<Item> FindInvisibleArea(Item item)
-        {
-            Ray ray;
-            Item edge_1 = null, edge_2 = null;
-            foreach (var itemArea in items)
-            {
-                if (!itemArea.Equals(item))
-                {
-                    ray = new Ray(item.CurrentPoint, itemArea.CurrentPoint);
-                    //if (Cross(ray, items) == 1)
-                    //{
-                    //    if (edge_1 == null)
-                    //        edge_1 = itemArea;
-                    //    else
-                    //    {
-                    //        edge_2 = itemArea;
-                    //        break;
-                    //    }
-                    //}
-                }
-            }
-
-            List<Item> invisibleArea = GetNearestWall(edge_1, GetNearestItem(item), edge_2);
-
-            InvisibleZone zone = new InvisibleZone(_form, invisibleArea);
-
-            invisibleArea = zone.GetInvisibleZone(item, items);
-
-            //_form.FullArea(invisibleArea, new Pen(Color.Yellow, 5f));
-            return invisibleArea;
-        }
-        public List<ItemDistanceTo> Difference(List<ItemDistanceTo> IDT)
-        {
-            for(int i = 0; i < items.Count; i++)
-            {
-                for(int j = 0; j < IDT.Count; j++)
-                {
-                    if(items[i].Equals(IDT[j].CurrentItem))
-                    {
-                        IDT.RemoveAt(j);
-                    }
-                }
-            }
-            return IDT;
-        }
+       
     }
 }

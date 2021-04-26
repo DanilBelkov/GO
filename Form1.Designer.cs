@@ -185,6 +185,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.splitContainer1.Panel2.Controls.Add(this.label_Way);
             this.splitContainer1.Panel2.Controls.Add(this.ListSubTypes);
             this.splitContainer1.Panel2.Controls.Add(this.B_draw);

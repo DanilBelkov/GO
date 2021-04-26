@@ -18,23 +18,14 @@ namespace Go
     public partial class Form1 : Form
     {
         Bitmap img;//наша катринка
-        public List<SuperPoint> allPoints_list = new List<SuperPoint> (); //массив точек
         public List<Panel> panel_list = new List<Panel> { };
 
       
        // List<string> Way_list = new List<string> { }; //все пути
 
         public int Scale_img { get; private set; } // масштаб
-        TypeSequence type_seq = TypeSequence.OnePoint;
-        TypeZone type_zone = TypeZone.Flora;
         int overcome = 100;
-        SuperPoint old_Point = null;
         bool Btn_create_P = false;// флаг на нажатие кнопки создания массива координат
-        // SuperPoint superPoint;
-        List<SuperPoint> tempListPoints = new List<SuperPoint>();
-
-        List<LineP> lineList = new List<LineP>();
-        List<AreaP> areaList = new List<AreaP>();
 
         ToolStripButton B_zone, B_seq;
 
@@ -63,7 +54,7 @@ namespace Go
             comboBox1.SelectedItem = 0;
 
             Scale_img = 100;
-            _typeItem = new Flora("F");
+            _typeItem = new Flora("F", 0);
             _sequence = new Items.Single(this, _typeItem);
            
             //----------------------------
@@ -215,14 +206,14 @@ namespace Go
             {
                 item.SetPosition(item.CurrentPoint);
             }
-            foreach (var item in _allAreas)
-            {
-                item.CreatePanel();
-            }
-            foreach (var item in _allLines)
-            {
-                item.CreatePanel();
-            }
+            //foreach (var item in _allAreas)
+            //{
+            //    item.CreatePanel();
+            //}
+            //foreach (var item in _allLines)
+            //{
+            //    item.CreatePanel();
+            //}
 
             label_scale.Text = Scale_img.ToString() + "%"; // сообщаем это пользователю
 
@@ -250,14 +241,14 @@ namespace Go
                 {
                     item.SetPosition(item.CurrentPoint);
                 }
-                foreach (var item in _allAreas)
-                {
-                    item.CreatePanel();
-                }
-                foreach (var item in _allLines)
-                {
-                    item.CreatePanel();
-                }
+                //foreach (var item in _allAreas)
+                //{
+                //    item.CreatePanel();
+                //}
+                //foreach (var item in _allLines)
+                //{
+                //    item.CreatePanel();
+                //}
             }
 
             label_scale.Text = Scale_img.ToString() + "%";
@@ -344,6 +335,24 @@ namespace Go
                         }
                         else if(_sequence is Items.Area)
                         {
+                            Ray ray = new Ray(_tempItems.Last().CurrentPoint, _tempItems.First().CurrentPoint);
+                            if (ray.Lenght() > 20)
+                            {
+                                Point betweenPoint;
+                                Item betweenItem;
+                                while (ray.Lenght() > 20)
+                                {
+                                    betweenPoint = new Point(_tempItems.Last().CurrentPoint.X + (int)((ray.Coordinate.X / ray.Lenght()) * 20),
+                                        _tempItems.Last().CurrentPoint.Y + (int)((ray.Coordinate.Y / ray.Lenght()) * 20));
+                                    betweenItem = new Item(_allItems, this, betweenPoint, _typeItem, _sequence);
+                                    betweenItem.Previous = _tempItems.Last();
+                                    _tempItems.Last().Next = betweenItem;
+                                    _tempItems.Add(betweenItem);
+                                    _allItems.Add(betweenItem);
+                                    ray = new Ray(_tempItems.Last().CurrentPoint, _tempItems.First().CurrentPoint);
+                                }
+                            }
+
                             _tempItems.Last().Next = _tempItems.First();
                             _tempItems.First().Previous = _tempItems.Last();
                             //Items.Area area = _sequence as Items.Area;
@@ -522,7 +531,7 @@ namespace Go
                 B_zone.BackColor = Color.CadetBlue;
                 B_seq.BackColor = Color.CadetBlue;
 
-                _typeItem = new Flora("H");
+                _typeItem = new Flora("H", 0);
                // currentPanel.Visible = true;
                // currentPanel.Parent = pictureBox1;
             }
@@ -537,7 +546,7 @@ namespace Go
             B_zone = Tool_B_create_hydrography;
             B_zone.BackColor = Color.CadetBlue;
 
-            _typeItem = new Hydrography("H");
+            _typeItem = new Hydrography("H",0);
             _sequence.SetType(_typeItem);
         }
         //растительность
@@ -548,7 +557,7 @@ namespace Go
             B_zone = Tool_B_create_flora;
             B_zone.BackColor = Color.CadetBlue;
 
-            _typeItem = new Flora("H");
+            _typeItem = new Flora("H",0);
             _sequence.SetType(_typeItem);
         }
         //искусственные обьекты
@@ -559,7 +568,7 @@ namespace Go
             B_zone = Tool_B_create_artificalObject;
             B_zone.BackColor = Color.CadetBlue;
 
-            _typeItem = new ArtificalObject("H");
+            _typeItem = new ArtificalObject("H",0);
             _sequence.SetType(_typeItem);
         }
         //рельеф
@@ -570,7 +579,7 @@ namespace Go
             B_zone = Tool_B_create_landform;
             B_zone.BackColor = Color.CadetBlue;
 
-            _typeItem = new Landform("H");
+            _typeItem = new Landform("H",0);
             _sequence.SetType(_typeItem);
         }
         //камни(скалы)
@@ -581,7 +590,7 @@ namespace Go
             B_zone = Tool_B_create_stone;
             B_zone.BackColor = Color.CadetBlue;
 
-            _typeItem = new Stone("H");
+            _typeItem = new Stone("H",0);
             _sequence.SetType(_typeItem);
         }
         
@@ -594,14 +603,6 @@ namespace Go
             B_seq = Tool_B_area;
             B_seq.BackColor = Color.CadetBlue;
 
-            //currentPanel.Visible = false;
-            //currentPanel = panel_Area;
-            //currentPanel.Visible = true;
-            //currentPanel.Parent = pictureBox1;
-
-            //type_seq_flag = 2;
-            type_seq = TypeSequence.Area;
-
             _sequence = new Items.Area();
         }
         //линия
@@ -612,14 +613,6 @@ namespace Go
             B_seq = Tool_B_line;
             B_seq.BackColor = Color.CadetBlue;
 
-            //currentPanel.Visible = false;
-            //currentPanel = panel_Line;
-            //currentPanel.Visible = true;
-            //currentPanel.Parent = pictureBox1;
-
-            //type_seq_flag = 1;
-            type_seq = TypeSequence.Line;
-
             _sequence = new Items.Line();
         }
         //обьект
@@ -629,14 +622,6 @@ namespace Go
             B_seq.BackColor = Color.DarkTurquoise;
             B_seq = Tool_B_item;
             B_seq.BackColor = Color.CadetBlue;
-
-            //currentPanel.Visible = false;
-            //currentPanel = panel_Point;
-            //currentPanel.Visible = true;
-            //currentPanel.Parent = pictureBox1;
-
-            //type_seq_flag = 0;
-            type_seq = TypeSequence.OnePoint;
 
             _sequence = new Items.Single();
         }
@@ -654,7 +639,8 @@ namespace Go
         public void anyPanel_Click(object sender, EventArgs e)
         {
             Panel tempPanel = (Panel)sender;
-            label_Way.Text = tempPanel.Name;
+            label_Way.Text = tempPanel.Name + "--" + _allItems[int.Parse(tempPanel.Name)].ID;
+            
             //int id = int.Parse(tempPanel.Name.Substring(12));
             //SuperPoint tempSP =  SuperPoint.findSuperPoint(id);
             //if(tempSP.type_seq == 2)
