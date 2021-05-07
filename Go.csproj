@@ -214,10 +214,9 @@
     <Content Include="icons\minus.png" />
     <Content Include="icons\plus.png" />
     <None Include="icons\Point.png" />
-    <None Include="Resources\EnabledPoint.png" />
-    <None Include="Resources\Point.png" />
-    <None Include="Resources\point.bmp" />
-    <None Include="Resources\minus.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

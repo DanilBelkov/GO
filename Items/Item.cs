@@ -12,6 +12,18 @@ namespace Go.Items
         public Item CurrentItem;
         public double distance;
 
+        static public bool RemoveItem(List<ItemDistanceTo> IDT, Item item)
+        {
+            for (int i = 0; i< IDT.Count; i++)
+            {
+                if (IDT[i].CurrentItem.Equals(item))
+                {
+                    IDT.Remove(IDT[i]);
+                    return true;
+                }
+            }
+            return false;
+        }
         static public ItemDistanceTo GetItemDT(List<ItemDistanceTo> IDT, Item item)
         {
             foreach(var itemIDT in IDT)
@@ -37,8 +49,7 @@ namespace Go.Items
     }
     public class Item
     {
-        public Sequence Sequence { get; set; }
-        public TypeItem TypeItem { get; private set; }
+        public List<TypeItem> Types = new List<TypeItem>();
         public int ID { get; protected set; }
         public Panel NewPanel;
         public Item Next = null, Previous = null;
@@ -56,32 +67,33 @@ namespace Go.Items
         {
             CurrentPoint = point;
         }
-        public Item(List<Item> allItems, Form1 form, TypeItem type, Sequence seq)
+        public Item(List<Item> allItems, Form1 form, TypeItem type)
         {
             ID = _id++;
             _form = form;
-            Sequence = seq;
-            TypeItem = type;
+            Types.Add(type);
             FindNearItems(allItems);
         }
-        public Item(List<Item> allItems, Form1 form, Point point, TypeItem type, Sequence seq)
+        public Item(List<Item> allItems, Form1 form, Point point, TypeItem type)
         {
             ID = _id++;
             CurrentPoint = point;
             CurrentCircle = new Circle(point, 40);
             _form = form;
-            Sequence = seq;
-            TypeItem = type;
+            Types.Add(type);
             CreatePanel();
             FindNearItems(allItems);
-            //FixNearItems();
+            FixNearItems();
         }
 
         public void SetPosition(Point point)
         {
             CurrentPoint = point;
-            CreatePanel();
+            NewPanel.Location = new Point(CurrentPoint.X * _form.Scale_img / 100 - _sizePanel / 2, CurrentPoint.Y * _form.Scale_img / 100 - _sizePanel / 2);
+            //CreatePanel();
             CurrentCircle = new Circle(point, 40);
+
+            _form.GetPictureBox.Controls.Add(NewPanel);
         }
         public void RemoveNearItem(Item item)
         {
@@ -102,8 +114,8 @@ namespace Go.Items
             NewPanel.Name = ID.ToString();
             NewPanel.BackgroundImage = Properties.Resources.Point;
             NewPanel.BackgroundImageLayout = ImageLayout.Zoom;
-            //NewPanel.BackColor = Color.Black;
             NewPanel.Click += new EventHandler(_form.anyPanel_Click);
+            _form.panel_list.Add(NewPanel);
 
             _form.GetPictureBox.Controls.Add(NewPanel);
         }
@@ -146,10 +158,13 @@ namespace Go.Items
                 Ray FromMainToFix = new Ray(CurrentPoint, near.CurrentItem.CurrentPoint);
                 foreach(var near2 in NearItems)
                 {
-                    if(near2.CurrentItem.Sequence.Cross(FromMainToFix))
+                    foreach (var type in near2.CurrentItem.Types)
                     {
-                        nearFixedList.Add(near);
-                        break;
+                        if (type.Sequence.Cross(FromMainToFix))
+                        {
+                            nearFixedList.Add(near);
+                            break;
+                        }
                     }
                 }
             }
@@ -160,7 +175,7 @@ namespace Go.Items
             foreach(var itemFixed in listFixed)
             {
                 NearItems.Remove(itemFixed);
-                itemFixed.CurrentItem.NearItems.Remove(ItemDistanceTo.GetItemDT(NearItems, this));
+                ItemDistanceTo.RemoveItem(itemFixed.CurrentItem.NearItems, this);
             }
         }
         public override bool Equals(Object point)

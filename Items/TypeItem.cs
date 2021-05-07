@@ -7,7 +7,8 @@ namespace Go.Items
         public string Name { get; protected set; }
         public Color Color { get; protected set; }
         public int Overcome { get; protected set; }
-
+        public Sequence Sequence;
+        abstract public TypeItem GetCopy();
         protected TypeItem(string name, int overcome)
         {
             Name = name;
@@ -21,12 +22,87 @@ namespace Go.Items
         {
             Color = Color.DeepSkyBlue;
         }
+        override public TypeItem GetCopy()
+        {
+            return new Hydrography(Name, Overcome);
+        }
     }
+    public class Lake : Hydrography
+    {
+        public Lake() : base("Lake", 0)
+        {
+            Sequence = new Items.Area();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Lake();
+        }
+    }
+    public class Pond : Hydrography // пруд
+    {
+        public Pond() : base("Pond", 80)
+        {
+            Sequence = new Items.Area();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Pond();
+        }
+    }
+    public class ImpassableSwamp : Hydrography
+    {
+        public ImpassableSwamp() : base("ImpassableSwamp", 0)
+        {
+            Sequence = new Items.Area();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new ImpassableSwamp();
+        }
+    }
+    public class Swamp : Hydrography
+    {
+        public Swamp() : base("Swamp",90)
+        {
+            Sequence = new Items.Area();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Swamp();
+        }
+    }
+    public class Waterlogging : Hydrography // заболоченность
+    {
+        public Waterlogging() : base("Waterlogging", 60)
+        {
+            Sequence = new Items.Area();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Waterlogging();
+        }
+    }
+    public class ImpassableRiver : Hydrography
+    {
+        public ImpassableRiver() : base("Single", 0)//"ImpassableRiver", 0)
+        {
+            Sequence = new Items.Single();//Line();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new ImpassableRiver();
+        }
+    }
+
     public class Flora : TypeItem
     {
         public Flora(string name, int overcome) : base(name, overcome)
         {
             Color = Color.ForestGreen;
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Flora(Name, Overcome);
         }
     }
     public class ArtificalObject : TypeItem
@@ -34,6 +110,10 @@ namespace Go.Items
         public ArtificalObject(string name, int overcome) : base(name, overcome)
         {
             Color = Color.Black;
+        }
+        override public TypeItem GetCopy()
+        {
+            return new ArtificalObject(Name, Overcome);
         }
     }
     public class Landform : TypeItem
@@ -44,12 +124,20 @@ namespace Go.Items
             Color = Color.SaddleBrown;
             Level = level;
         }
+        override public TypeItem GetCopy()
+        {
+            return new Landform(Name, Overcome);
+        }
     }
     public class Stone : TypeItem
     {
-        public Stone(string name, int overcome) : base(name, overcome)
+        public Stone(string name,int overcome) : base(name,overcome)
         {
             Color = Color.Gray;
+        }
+        override public TypeItem GetCopy()
+        {
+            return new Stone(Name, Overcome);
         }
     }
 }
