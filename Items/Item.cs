@@ -90,10 +90,12 @@ namespace Go.Items
         {
             CurrentPoint = point;
             NewPanel.Location = new Point(CurrentPoint.X * _form.Scale_img / 100 - _sizePanel / 2, CurrentPoint.Y * _form.Scale_img / 100 - _sizePanel / 2);
-            //CreatePanel();
             CurrentCircle = new Circle(point, 40);
 
-            _form.GetPictureBox.Controls.Add(NewPanel);
+        }
+        public void Scale(int scale)
+        {
+            NewPanel.Location = new Point(CurrentPoint.X * scale / 100 - _sizePanel / 2, CurrentPoint.Y * scale / 100 - _sizePanel / 2);
         }
         public void RemoveNearItem(Item item)
         {
@@ -119,7 +121,6 @@ namespace Go.Items
 
             _form.GetPictureBox.Controls.Add(NewPanel);
         }
-
         public double GetDistanceTo(Item pointTo)
         {
             return Math.Sqrt(Math.Pow((pointTo.CurrentPoint.X - CurrentPoint.X), 2) + Math.Pow((pointTo.CurrentPoint.Y - CurrentPoint.Y), 2));

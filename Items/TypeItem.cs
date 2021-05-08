@@ -84,13 +84,79 @@ namespace Go.Items
     }
     public class ImpassableRiver : Hydrography
     {
-        public ImpassableRiver() : base("Single", 0)//"ImpassableRiver", 0)
+        public ImpassableRiver() : base("ImpassableRiver", 0)
         {
-            Sequence = new Items.Single();//Line();
+            Sequence = new Items.Line();
         }
         override public TypeItem GetCopy()
         {
             return new ImpassableRiver();
+        }
+    }
+    public class DisappearRiver : Hydrography
+    {
+        public DisappearRiver() : base("DisappearRiver", 0)
+        {
+            Sequence = new Items.Line();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new DisappearRiver();
+        }
+    }
+    public class SlimSwamp : Hydrography
+    {
+        public SlimSwamp() : base("SlimSwamp", 0)
+        {
+            Sequence = new Items.Line();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new SlimSwamp();
+        }
+    }
+    public class WaterLittlePit : Hydrography
+    {
+        public WaterLittlePit() : base("WaterLittlePit", 0)
+        {
+            Sequence = new Items.Single();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new WaterLittlePit();
+        }
+    }
+    public class WaterPit : Hydrography
+    {
+        public WaterPit() : base("WaterPit", 0)
+        {
+            Sequence = new Items.Single();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new WaterPit();
+        }
+    }
+    public class WaterSource : Hydrography
+    {
+        public WaterSource() : base("WaterSource", 0)
+        {
+            Sequence = new Items.Single();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new WaterSource();
+        }
+    }
+    public class WaterObject : Hydrography
+    {
+        public WaterObject() : base("WaterObject", 0)
+        {
+            Sequence = new Items.Single();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new WaterObject();
         }
     }
 

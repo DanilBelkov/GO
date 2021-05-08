@@ -29,13 +29,12 @@ namespace Go
         private bool Btn_item_from = false, Btn_item_to = false;
         private Item item_to, item_from;
 
-        private ToolStripButton B_zone, B_seq;
+        private ToolStripLabel _zone, _seq;
+        private Button _type_B;
 
         private Panel _panelTemp;
-
-
+       
         private TypeItem _typeItem;
-        //private Items.Sequence _sequence;
         private Item _item;
 
         private List<Item> _allItems = new List<Item>();
@@ -49,29 +48,21 @@ namespace Go
         {
             InitializeComponent();
 
-            B_zone = Tool_B_create_flora;
-            B_seq = Tool_B_item;
-
             Scale_img = 100;
-            //_sequence = new Items.Single(this);
-            _typeItem = new Flora("H", 0);
 
-            //----------------------------
-            ToolStripMenuItem toolTemp;
-            for (int i = 0; i < 25; i++)
-            {
-                toolTemp = new ToolStripMenuItem();
-                toolTemp.BackgroundImageLayout = ImageLayout.None;
-                toolTemp.Image = Properties.Resources.building;
-                toolTemp.ImageAlign = ContentAlignment.MiddleLeft;
-                toolTemp.ImageScaling = ToolStripItemImageScaling.None;
-                toolTemp.Name = "TS" + i;
-                toolTemp.Size = new Size(230, 28);
-                toolTemp.Text = "TS" + i;
-                toolTemp.Click += new EventHandler(toolStripMenuItem_Click);
-
-                tool_B_subtype.DropDownItems.Add(toolTemp);
-            }
+            //Гидрография
+            toolTip.SetToolTip(B_Lake, "Озеро");
+            toolTip.SetToolTip(B_ImpossibleRiver, "Непреодалимая река");
+            toolTip.SetToolTip(B_ImpossibleSwamp, "Нереодалимое болото");
+            toolTip.SetToolTip(B_Waterlogging, "Заболоченоость");
+            toolTip.SetToolTip(B_Swamp, "Болото");
+            toolTip.SetToolTip(B_River, "Ручей");
+            toolTip.SetToolTip(B_DisappearRiver, "Исчезающий ручей");
+            toolTip.SetToolTip(B_SlimSwamp, "Узкое болото");
+            toolTip.SetToolTip(B_WaterLittlePit, "Водянная воронка");
+            toolTip.SetToolTip(B_WaterPit, "Колодец");
+            toolTip.SetToolTip(B_WaterSource, "Источник воды");
+            toolTip.SetToolTip(B_WaterObject, "Особый объект гидрографии");
 
             //if (!File.Exists(@"database\GODB.db")) // если базы данных нету, то...
             //{
@@ -187,11 +178,12 @@ namespace Go
             else
                 pictureBox1.Location = new Point(pictureBox1.Location.X - img.Width / 20, pictureBox1.Location.Y - img.Height / 20);
             
-            pictureBox1.Controls.Clear();
+            //pictureBox1.Controls.Clear();
             
             foreach (var item in _allItems)
             {
-                item.SetPosition(item.CurrentPoint);
+                //item.SetPosition(item.CurrentPoint);
+                item.Scale(Scale_img);
             }
 
             label_scale.Text = Scale_img.ToString() + "%"; // сообщаем это пользователю
@@ -216,11 +208,12 @@ namespace Go
                     pictureBox1.Location = new Point(pictureBox1.Location.X + img.Width / 20, pictureBox1.Location.Y + img.Height / 20);
 
 
-                pictureBox1.Controls.Clear();
+                //pictureBox1.Controls.Clear();
 
                 foreach (var item in _allItems)
                 {
-                    item.SetPosition(item.CurrentPoint);
+                    //item.SetPosition(item.CurrentPoint);
+                    item.Scale(Scale_img);
                 }
             }
 
@@ -300,7 +293,6 @@ namespace Go
                         if(_typeItem.Sequence is Items.Line)
                         {
                             _allLines.Add(_typeItem.Sequence as Items.Line);
-                            //_typeItem.Sequence = new Items.Line(this);
                         }
                         else if(_typeItem.Sequence is Items.Area)
                         {
@@ -308,11 +300,9 @@ namespace Go
 
                             _tempItems.Last().Next = _tempItems.First();
                             _tempItems.First().Previous = _tempItems.Last();
-
                             _typeItem.Sequence.SetItems(_tempItems);
 
                             _allAreas.Add(_typeItem.Sequence as Items.Area);
-                            //_typeItem = _typeItem.GetCopy();
                         }
                         _typeItem = _typeItem.GetCopy();
                         DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
@@ -322,9 +312,7 @@ namespace Go
                     {
                         Point localPoint = new Point(e.Location.X * 100 / Scale_img, e.Location.Y * 100 / Scale_img);
                         _item = new Item(_allItems, this, localPoint, _typeItem);
-
                         _allItems.Add(_item);
-
 
                         if (_typeItem.Sequence is Items.Single)
                         {
@@ -335,12 +323,10 @@ namespace Go
                             DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
                             _tempItems.Clear();
 
-                            //_typeItem.Sequence = new Items.Single(this);
                             _typeItem = _typeItem.GetCopy();
                         }
                         else
                         {
-                           
                             if (_tempItems.Count != 0)
                             {
                                 // Добавляем промежуточные точки 
@@ -452,28 +438,28 @@ namespace Go
                 //}
                 //меняем цыет на изначальный
 
-                B_zone.BackColor = Color.DarkTurquoise;
-                B_seq.BackColor = Color.DarkTurquoise;
+                //_zone.BackColor = Color.DarkTurquoise;
+                //_seq.BackColor = Color.DarkTurquoise;
 
 
             }
            
             Btn_create_P = !Btn_create_P;//обратное значение
             //открываем и закрываем возможность нажатия на кнопки тула
-            Tool_B_create_flora.Enabled = Btn_create_P;
-            Tool_B_create_hydrography.Enabled = Btn_create_P;
-            Tool_B_create_artificalObject.Enabled = Btn_create_P;
-            Tool_B_create_landform.Enabled = Btn_create_P;
-            Tool_B_create_stone.Enabled = Btn_create_P;
+            Tool_flora.Enabled = Btn_create_P;
+            Tool_hydrography.Enabled = Btn_create_P;
+            Tool_artificalObject.Enabled = Btn_create_P;
+            Tool_landform.Enabled = Btn_create_P;
+            Tool_stone.Enabled = Btn_create_P;
 
-            Tool_B_area.Enabled = Btn_create_P;
-            Tool_B_line.Enabled = Btn_create_P;
-            Tool_B_item.Enabled = Btn_create_P;
+            Tool_area.Enabled = Btn_create_P;
+            Tool_line.Enabled = Btn_create_P;
+            Tool_item.Enabled = Btn_create_P;
             //ставим значение по умолчанию
             if (Btn_create_P)
             {
-                B_zone.BackColor = Color.CadetBlue;
-                B_seq.BackColor = Color.CadetBlue;
+                //_zone.BackColor = Color.CadetBlue;
+                //_seq.BackColor = Color.CadetBlue;
 
                 _typeItem = new Flora("S", 0);
 
@@ -481,90 +467,6 @@ namespace Go
             }
         }
 
-
-
-        //гидрография
-        private void Tool_B_create_hydrography_Click(object sender, EventArgs e)
-        {
-            B_zone.BackColor = Color.DarkTurquoise;
-            B_zone = Tool_B_create_hydrography;
-            B_zone.BackColor = Color.CadetBlue;
-
-            _typeItem = new Hydrography("S", 0);
-        }
-        //растительность
-        private void Tool_B_create_flora_Click(object sender, EventArgs e)
-        {
-          
-            B_zone.BackColor = Color.DarkTurquoise;
-            B_zone = Tool_B_create_flora;
-            B_zone.BackColor = Color.CadetBlue;
-
-            _typeItem = new Flora("S", 0);
-        }
-        //искусственные обьекты
-        private void Tool_B_create_artificalObject_Click(object sender, EventArgs e)
-        {
-         
-            B_zone.BackColor = Color.DarkTurquoise;
-            B_zone = Tool_B_create_artificalObject;
-            B_zone.BackColor = Color.CadetBlue;
-
-            _typeItem = new ArtificalObject("S", 0);
-        }
-        //рельеф
-        private void Tool_B_create_landform_Click(object sender, EventArgs e)
-        {
-          
-            B_zone.BackColor = Color.DarkTurquoise;
-            B_zone = Tool_B_create_landform;
-            B_zone.BackColor = Color.CadetBlue;
-
-            _typeItem = new Landform("S", 0);
-        }
-        //камни(скалы)
-        private void Tool_B_create_stone_Click(object sender, EventArgs e)
-        {
-           
-            B_zone.BackColor = Color.DarkTurquoise;
-            B_zone = Tool_B_create_stone;
-            B_zone.BackColor = Color.CadetBlue;
-
-            _typeItem = new Stone("S", 0);
-        }
-        
-        
-        //область
-        private void Tool_B_area_Click(object sender, EventArgs e)
-        {
-
-            B_seq.BackColor = Color.DarkTurquoise;
-            B_seq = Tool_B_area;
-            B_seq.BackColor = Color.CadetBlue;
-
-            //_sequence = new Items.Area(this);
-        }
-        //линия
-        private void Tool_B_line_Click(object sender, EventArgs e)
-        {
-            
-            B_seq.BackColor = Color.DarkTurquoise;
-            B_seq = Tool_B_line;
-            B_seq.BackColor = Color.CadetBlue;
-
-            //_sequence = new Items.Line(this);
-        }
-        //обьект
-        private void Tool_B_item_Click(object sender, EventArgs e)
-        {
-          
-            B_seq.BackColor = Color.DarkTurquoise;
-            B_seq = Tool_B_item;
-            B_seq.BackColor = Color.CadetBlue;
-
-            //_sequence = new Items.Single(this);
-        }
-     
 
         //---------------------
         private void toolStripMenuItem_Click(object sender, EventArgs e)
@@ -657,12 +559,31 @@ namespace Go
                         tempPoints.Last().Y + (int)((ray.Coordinate.Y / ray.Lenght()) * 20));
                     CreateTempPanel(betweenPoint, 6);
                     tempPoints.Add(betweenPoint);
-
+                    
                     ray = new Ray(_tempItems.Last().CurrentPoint, to);
                 }
             }
         }
-        //рисовать кривую 
+
+        private void ChangeBackColors(Button button_type, ToolStripLabel tsl_zone, ToolStripLabel tsl_seq)
+        {
+            if (_type_B != null && _zone != null && _seq != null)
+            {
+                _type_B.BackColor = Color.Azure;
+                _zone.BackgroundImage = null;
+                _seq.BackgroundImage = null;
+            }
+
+            _type_B = button_type;
+            _type_B.BackColor = Color.CadetBlue;
+
+            _zone = tsl_zone;
+            _zone.BackgroundImage = Properties.Resources.Point;
+
+            _seq = tsl_seq;
+            _seq.BackgroundImage = Properties.Resources.Point;
+        }
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if(pictureBox1.Image != null && Btn_create_P)
@@ -697,32 +618,95 @@ namespace Go
         {
            // isPressed = false;
         }
-
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             //isPressed = true; 
             //CurrentPoint = e.Location;
         }
-
         private void B_from_Click(object sender, EventArgs e)
         {
             Btn_item_from = !Btn_item_from;
-        }
-
-        private void B_Lake_Click(object sender, EventArgs e)
-        {
-            _typeItem = new Lake();
-        }
-
-        private void B_River_Click(object sender, EventArgs e)
-        {
-            _typeItem = new ImpassableRiver();
         }
 
         private void B_to_Click(object sender, EventArgs e)
         {
             Btn_item_to = !Btn_item_to;
         }
+        /// <summary>
+        /// Отсюда обрабатываются нажатия на кнопки с типами 
+        /// </summary>
+        private void B_Lake_Click(object sender, EventArgs e)
+        {
+            _typeItem = new Lake();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_area);    
+        }
+
+        private void B_ImpossibleRiver_Click(object sender, EventArgs e)
+        {
+            _typeItem = new ImpassableRiver();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
+        }
+
+        private void B_River_Click(object sender, EventArgs e)
+        {
+            _typeItem = new Pond();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
+        }
+
+        private void B_ImpossibleSwamp_Click(object sender, EventArgs e)
+        {
+            _typeItem = new ImpassableSwamp();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_area);
+        }
+
+        private void B_Waterlogging_Click(object sender, EventArgs e)
+        {
+            _typeItem = new Waterlogging();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_area);
+        }
+
+        private void B_DisappearRiver_Click(object sender, EventArgs e)
+        {
+            _typeItem = new DisappearRiver();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
+        }
+
+        private void B_SlimSwamp_Click(object sender, EventArgs e)
+        {
+            _typeItem = new SlimSwamp();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
+        }
+
+        private void B_WaterLittlePit_Click(object sender, EventArgs e)
+        {
+            _typeItem = new WaterLittlePit();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_item);
+        }
+
+        private void B_WaterPit_Click(object sender, EventArgs e)
+        {
+            _typeItem = new WaterPit();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_item);
+        }
+
+        private void B_WaterSource_Click(object sender, EventArgs e)
+        {
+            _typeItem = new WaterSource();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_item);
+        }
+
+        private void B_WaterObject_Click(object sender, EventArgs e)
+        {
+            _typeItem = new WaterObject();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_item);
+        }
+
+        private void B_Swamp_Click(object sender, EventArgs e)
+        {
+            _typeItem = new Swamp();
+            ChangeBackColors((Button)sender, Tool_hydrography, Tool_area);
+        }
+
 
         public void DrawWay(List<Item> list, Pen pen)
         {

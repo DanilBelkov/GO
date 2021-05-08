@@ -120,9 +120,6 @@
     <None Include="icons\open-file_40455.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\magnifier_plus_icon-icons.com_67832.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="icons\3844431-in-magnifier-plus-search-zoom_110317.png" />
   </ItemGroup>
   <ItemGroup>
@@ -150,66 +147,78 @@
     <None Include="icons\area.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\badlyRunForest.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\swamp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\building.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\easyRunForest.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\hardRunForest.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\garden.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\grape.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\lake.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\locality.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\littleSwamp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\notRunArea.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\notRunSwamp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\openSpace2.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\openHardRunForest.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\openSpace.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\ruins.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\openStonyArea.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\plowed.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\puddle.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="icons\stonyArea.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="icons\кормушка.png" />
+    <None Include="icons\яма.png" />
+    <None Include="icons\шоссе.png" />
+    <None Include="icons\узкое болото.png" />
+    <None Include="icons\труднопробегаемый лес.png" />
+    <None Include="icons\труднопробегаемые кусты.png" />
+    <None Include="icons\трубопровод.png" />
+    <None Include="icons\стрельбище.png" />
+    <None Include="icons\среднепробегаемый лес.png" />
+    <None Include="icons\скальная яма.png" />
+    <None Include="icons\скальная плита.png" />
+    <None Include="icons\сад.png" />
+    <None Include="icons\руины.png" />
+    <None Include="icons\река.png" />
+    <None Include="icons\разрушенный забор.png" />
+    <None Include="icons\разрушенная каменная стена.png" />
+    <None Include="icons\проходимая скала.png" />
+    <None Include="icons\просека.png" />
+    <None Include="icons\промоина.png" />
+    <None Include="icons\поляна.png" />
+    <None Include="icons\пилон, столбик.png" />
+    <None Include="icons\паханные земли.png" />
+    <None Include="icons\озеро.png" />
+    <None Include="icons\непроходимый трубопровод.png" />
+    <None Include="icons\непроходимое болото.png" />
+    <None Include="icons\непроходимая скала.png" />
+    <None Include="icons\непроходимая река.png" />
+    <None Include="icons\непробегаемый лес.png" />
+    <None Include="icons\непреодолимый забор.png" />
+    <None Include="icons\непреодолимая каменная стена.png" />
+    <None Include="icons\насыпь земли.png" />
+    <None Include="icons\населенный пункт.png" />
+    <None Include="icons\муровейник.png" />
+    <None Include="icons\могила.png" />
+    <None Include="icons\микроямка.png" />
+    <None Include="icons\микроямка%28внемасштаб%29.png" />
+    <None Include="icons\микробугорок.png" />
+    <None Include="icons\ЛЭП.png" />
+    <None Include="icons\лесная тропа.png" />
+    <None Include="icons\лес пробегаемый в одном направлении.png" />
+    <None Include="icons\легкопробегаемые кусты.png" />
+    <None Include="icons\колодец.png" />
+    <None Include="icons\капонир.png" />
+    <None Include="icons\канава.png" />
+    <None Include="icons\камень.png" />
+    <None Include="icons\каменная стена.png" />
+    <None Include="icons\каменная россыпь.png" />
+    <None Include="icons\каменистая поверхность.png" />
+    <None Include="icons\исчезающая тропа.png" />
+    <None Include="icons\исчезающая река.png" />
+    <None Include="icons\искусственный объект_2.png" />
+    <None Include="icons\искусственный объект_1.png" />
+    <None Include="icons\здание.png" />
+    <None Include="icons\запрещенное место.png" />
+    <None Include="icons\забор.png" />
+    <None Include="icons\заболоченность.png" />
+    <None Include="icons\ЖД.png" />
+    <None Include="icons\дорога для машин.png" />
+    <None Include="icons\дерево.png" />
+    <None Include="icons\группа камней.png" />
+    <None Include="icons\горизонталь рельефа.png" />
+    <None Include="icons\вышка.png" />
+    <None Include="icons\водный объект.png" />
+    <None Include="icons\водный источник.png" />
+    <None Include="icons\водная воронка.png" />
+    <None Include="icons\ВЛЭП.png" />
+    <None Include="icons\бугор.png" />
+    <None Include="icons\болото.png" />
+    <None Include="icons\башня.png" />
+    <None Include="icons\асфальт.png" />
+    <None Include="icons\куст.png" />
+    <None Include="icons\обрыв.png" />
     <None Include="icons\EnabledPoint.png" />
     <Content Include="icons\minus.png" />
     <Content Include="icons\plus.png" />

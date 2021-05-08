@@ -121,9 +121,6 @@
   <data name="landform" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\landform.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="magnifier_plus_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\magnifier_plus_icon-icons.com_67832.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="stone" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\stone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,69 +148,6 @@
   <data name="area" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\area.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="area1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\area.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="building" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\building.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraBadlyRunForest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\badlyRunForest.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraEasyRunForest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\easyRunForest.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraGarden" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\garden.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraGrape" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\grape.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraHardRunForest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\hardRunForest.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraOpenHardRunForest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\openHardRunForest.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraOpenSpace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\openSpace.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraOpenSpace2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\openSpace2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraOpenStonyArea" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\openStonyArea.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="floraPlowed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\plowed.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="lake" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\lake.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="littleSwamp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\littleSwamp.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="locality" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\locality.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="notRunArea" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\notRunArea.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="notRunSwamp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\notRunSwamp.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="puddle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\puddle.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ruins" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\ruins.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="stonyArea" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\stonyArea.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="swamp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\swamp.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -225,5 +159,221 @@
   </data>
   <data name="Point" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\icons\Point.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="куст" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\куст.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="обрыв" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\обрыв.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="асфальт" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\асфальт.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="башня" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\башня.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="болото" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\болото.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="бугор" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\бугор.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ВЛЭП" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ВЛЭП.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="водная_воронка" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\водная воронка.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="водный_источник" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\водный источник.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="водный_объект" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\водный объект.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="вышка" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\вышка.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="горизонталь_рельефа" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\горизонталь рельефа.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="группа_камней" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\группа камней.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="дерево" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\дерево.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="дорога_для_машин" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\дорога для машин.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ЖД" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ЖД.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="заболоченность" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\заболоченность.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="забор" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\забор.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="запрещенное_место" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\запрещенное место.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="здание" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\здание.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="искусственный_объект_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\искусственный объект_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="искусственный_объект_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\искусственный объект_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="исчезающая_река" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\исчезающая река.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="исчезающая_тропа" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\исчезающая тропа.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="каменистая_поверхность" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\каменистая поверхность.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="каменная_россыпь" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\каменная россыпь.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="каменная_стена" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\каменная стена.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="камень" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\камень.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="канава" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\канава.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="капонир" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\капонир.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="колодец" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\колодец.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="кормушка" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\кормушка.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="легкопробегаемые_кусты" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\легкопробегаемые кусты.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="лес_пробегаемый_в_одном_направлении" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\лес пробегаемый в одном направлении.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="лесная_тропа" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\лесная тропа.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ЛЭП" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\ЛЭП.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="микробугорок" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\микробугорок.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="микроямка" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\микроямка.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="микроямка_внемасштаб_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\микроямка(внемасштаб).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="могила" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\могила.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="муровейник" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\муровейник.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="населенный_пункт" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\населенный пункт.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="насыпь_земли" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\насыпь земли.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непреодолимая_каменная_стена" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непреодолимая каменная стена.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непреодолимый_забор" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непреодолимый забор.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непробегаемый_лес" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непробегаемый лес.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непроходимая_река" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непроходимая река.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непроходимая_скала" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непроходимая скала.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непроходимое_болото" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непроходимое болото.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="непроходимый_трубопровод" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\непроходимый трубопровод.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="озеро" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\озеро.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="паханные_земли" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\паханные земли.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="пилон__столбик" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\пилон, столбик.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="поляна" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\поляна.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="промоина" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\промоина.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="просека" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\просека.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="проходимая_скала" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\проходимая скала.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="разрушенная_каменная_стена" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\разрушенная каменная стена.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="разрушенный_забор" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\разрушенный забор.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="река" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\река.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="руины" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\руины.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="сад" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\сад.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="скальная_плита" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\скальная плита.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="скальная_яма" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\скальная яма.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="среднепробегаемый_лес" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\среднепробегаемый лес.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="стрельбище" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\стрельбище.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="трубопровод" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\трубопровод.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="труднопробегаемые_кусты" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\труднопробегаемые кусты.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="труднопробегаемый_лес" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\труднопробегаемый лес.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="узкое_болото" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\узкое болото.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="шоссе" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\шоссе.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="яма" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icons\яма.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
