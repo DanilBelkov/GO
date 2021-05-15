@@ -65,12 +65,12 @@ namespace Go
             }
             return Point.Empty;
         }
-        public bool ContainsInner(Point point)
+        public bool ContainsInner(Point point, bool withEdge)
         {
             if (point.X >= Math.Min(from_P.X, to_P.X) && point.X <= Math.Max(from_P.X, to_P.X) &&
                 point.Y >= Math.Min(from_P.Y, to_P.Y) && point.Y <= Math.Max(from_P.Y, to_P.Y))
             {
-                if (point == from_P || point == to_P)
+                if (!withEdge && (point == from_P || point == to_P))
                     return false;
 
                 return true;
@@ -92,12 +92,6 @@ namespace Go
         }
         public Ray Increase(int heightMap)
         {
-            //to_P = new Point(from_P.X + Coordinate.X * heightMap, from_P.Y + Coordinate.Y * heightMap);//to_P.Y * (int)(heightMap / Lenght())
-            //A = from_P.Y - to_P.Y;
-            //B = to_P.X - from_P.X;
-            //C = from_P.X * to_P.Y - to_P.X * from_P.Y;
-
-            //Coordinate = new Point(to_P.X - from_P.X, to_P.Y - from_P.Y);
             return new Ray(from_P, new Point(from_P.X + Coordinate.X * heightMap, from_P.Y + Coordinate.Y * heightMap));
         }
         public bool IsMatch(Ray two)
@@ -125,10 +119,18 @@ namespace Go
             //пересекаются
             return true;
         }
-        public bool OrientationPoint(Point point)
+        public bool OnRight(Point point)
         {
-            int D = (point.X - from_P.X) * A - (point.Y - from_P.Y) * B;
+            int D = (point.X - from_P.X) * (-A) - (point.Y - from_P.Y) * B;
             if (D > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool Include(Point point)
+        {
+            int D = (point.X - from_P.X) * (-A) - (point.Y - from_P.Y) * B;
+            if (D == 0)
                 return true;
             else
                 return false;

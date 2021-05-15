@@ -147,6 +147,7 @@
     <None Include="icons\area.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="icons\чистый лес.png" />
     <None Include="icons\кормушка.png" />
     <None Include="icons\яма.png" />
     <None Include="icons\шоссе.png" />

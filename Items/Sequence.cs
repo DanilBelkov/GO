@@ -23,10 +23,9 @@ namespace Go.Items
             id++;
             _form = form;
         }
-        abstract public bool Cross(Ray ray);
+        abstract public bool Cross(Ray ray, bool withEdge);
         abstract public void SetItems(List<Item> list);
         abstract public Sequence GetCopy();
-
         public override bool Equals(Object seq)
         {
             if ((seq == null) || !this.GetType().Equals(seq.GetType()))
@@ -62,16 +61,15 @@ namespace Go.Items
         override public void SetItems(List<Item> items)
         {
             this.items = new List<Item>(items);
-            //if(!items.First().Sequences.Contains(this))
-            //    items.First().Sequences.Add(this);
         }
         override public Sequence GetCopy()
         {
             return new Single(_form, items);
         }
-        public override bool Cross(Ray ray)
+
+        public override bool Cross(Ray ray, bool withEdge)
         {
-            if (ray.ContainsInner(items.First().CurrentPoint) && items.First().CurrentPoint != ray.to_P)
+            if (ray.Include(items.First().CurrentPoint) && items.First().CurrentPoint != ray.to_P)
                 return true;
 
             return false;
@@ -98,12 +96,6 @@ namespace Go.Items
         override public void SetItems(List<Item> items)
         {
             this.items = new List<Item>(items);
-            //foreach (var item in this.items)
-            //{
-            //    if (!item.Types.Contains(this))
-            //        item.Sequences.Add(this);
-            //}
-            //CreatePanel();
         }
         public void CreatePanel()
         {
@@ -158,7 +150,8 @@ namespace Go.Items
         {
             return new Line(_form, items);
         }
-        public override bool Cross(Ray ray)
+
+        public override bool Cross(Ray ray, bool withEdge)
         {
             Ray newRay;
             try
@@ -169,7 +162,7 @@ namespace Go.Items
                     if (ray.IsCross(newRay))
                     {
                         Point crossPoint = ray.Cross(newRay);
-                        if (newRay.ContainsInner(crossPoint) && ray.ContainsInner(crossPoint))
+                        if (newRay.ContainsInner(crossPoint, withEdge) && ray.ContainsInner(crossPoint, withEdge))
                             return true;
                     }
                 }
@@ -205,7 +198,7 @@ namespace Go.Items
         {
             return new Area(_form, items);
         }
-        public override bool Cross(Ray ray)
+        public override bool Cross(Ray ray, bool withEdge)
         {
             Ray newRay;
             try
@@ -216,7 +209,7 @@ namespace Go.Items
                     if (ray.IsCross(newRay))
                     {
                         Point crossPoint = ray.Cross(newRay);
-                        if (newRay.ContainsInner(crossPoint) && ray.ContainsInner(crossPoint))
+                        if (newRay.ContainsInner(crossPoint, withEdge) && ray.ContainsInner(crossPoint, withEdge))
                             return true;
                     }
                 }
@@ -226,7 +219,7 @@ namespace Go.Items
                 if (ray.IsCross(newRay))
                 {
                     Point crossPoint = ray.Cross(newRay);
-                    if (ray.ContainsInner(crossPoint) && newRay.ContainsInner(crossPoint))
+                    if (ray.ContainsInner(crossPoint, withEdge) && newRay.ContainsInner(crossPoint, withEdge))
                         return true;
                 }
             }

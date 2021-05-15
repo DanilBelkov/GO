@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Go.Items
 {
@@ -7,12 +8,27 @@ namespace Go.Items
         public string Name { get; protected set; }
         public Color Color { get; protected set; }
         public int Overcome { get; protected set; }
+        public bool IsImpossible { get; protected set; }
         public Sequence Sequence;
         abstract public TypeItem GetCopy();
         protected TypeItem(string name, int overcome)
         {
             Name = name;
             Overcome = overcome;
+        }
+        public override bool Equals(Object type)
+        {
+            if ((type == null) || !this.GetType().Equals(type.GetType()))
+                return false;
+            else
+            {
+                TypeItem p = (TypeItem)type;
+                return (this.Name == p.Name && this.Sequence.Equals(p.Sequence));
+            }
+        }
+        public override int GetHashCode()
+        {
+            return Overcome;
         }
     }
 
@@ -21,6 +37,7 @@ namespace Go.Items
         public Hydrography(string name, int overcome) : base(name, overcome)
         {
             Color = Color.DeepSkyBlue;
+            IsImpossible = false;
         }
         override public TypeItem GetCopy()
         {
@@ -32,6 +49,7 @@ namespace Go.Items
         public Lake() : base("Lake", 0)
         {
             Sequence = new Items.Area();
+            IsImpossible = true;
         }
         override public TypeItem GetCopy()
         {
@@ -54,6 +72,7 @@ namespace Go.Items
         public ImpassableSwamp() : base("ImpassableSwamp", 0)
         {
             Sequence = new Items.Area();
+            IsImpossible = true;
         }
         override public TypeItem GetCopy()
         {
@@ -87,6 +106,7 @@ namespace Go.Items
         public ImpassableRiver() : base("ImpassableRiver", 0)
         {
             Sequence = new Items.Line();
+            IsImpossible = true;
         }
         override public TypeItem GetCopy()
         {
@@ -95,7 +115,7 @@ namespace Go.Items
     }
     public class DisappearRiver : Hydrography
     {
-        public DisappearRiver() : base("DisappearRiver", 0)
+        public DisappearRiver() : base("DisappearRiver", 20)
         {
             Sequence = new Items.Line();
         }
@@ -106,7 +126,7 @@ namespace Go.Items
     }
     public class SlimSwamp : Hydrography
     {
-        public SlimSwamp() : base("SlimSwamp", 0)
+        public SlimSwamp() : base("SlimSwamp", 50)
         {
             Sequence = new Items.Line();
         }
@@ -117,7 +137,7 @@ namespace Go.Items
     }
     public class WaterLittlePit : Hydrography
     {
-        public WaterLittlePit() : base("WaterLittlePit", 0)
+        public WaterLittlePit() : base("WaterLittlePit", 100)
         {
             Sequence = new Items.Single();
         }
@@ -128,7 +148,7 @@ namespace Go.Items
     }
     public class WaterPit : Hydrography
     {
-        public WaterPit() : base("WaterPit", 0)
+        public WaterPit() : base("WaterPit", 100)
         {
             Sequence = new Items.Single();
         }
@@ -139,7 +159,7 @@ namespace Go.Items
     }
     public class WaterSource : Hydrography
     {
-        public WaterSource() : base("WaterSource", 0)
+        public WaterSource() : base("WaterSource", 100)
         {
             Sequence = new Items.Single();
         }
@@ -150,7 +170,7 @@ namespace Go.Items
     }
     public class WaterObject : Hydrography
     {
-        public WaterObject() : base("WaterObject", 0)
+        public WaterObject() : base("WaterObject", 100)
         {
             Sequence = new Items.Single();
         }

@@ -903,6 +903,16 @@ namespace Go.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap чистый_лес {
+            get {
+                object obj = ResourceManager.GetObject("чистый_лес", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap шоссе {
             get {
                 object obj = ResourceManager.GetObject("шоссе", resourceCulture);

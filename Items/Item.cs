@@ -55,8 +55,9 @@ namespace Go.Items
         public Item Next = null, Previous = null;
         public Point CurrentPoint { get; private set; }
         public List<ItemDistanceTo> NearItems = new List<ItemDistanceTo>();
+        public List<ItemDistanceTo> NearItemsPart_1 = new List<ItemDistanceTo>();
+        public List<ItemDistanceTo> NearItemsPart_2 = new List<ItemDistanceTo>();
         public Circle CurrentCircle;
-        public int Overcome { get; private set; }
 
         protected Form1 _form;
 
@@ -65,6 +66,7 @@ namespace Go.Items
 
         public Item(Point point)
         {
+            ID = _id++;
             CurrentPoint = point;
         }
         public Item(List<Item> allItems, Form1 form, TypeItem type)
@@ -84,6 +86,7 @@ namespace Go.Items
             CreatePanel();
             FindNearItems(allItems);
             FixNearItems();
+            //SplitNearItems();
         }
 
         public void SetPosition(Point point)
@@ -107,7 +110,21 @@ namespace Go.Items
                 }
             }
         }
+        public int GetOvercome(Item previousItem, bool withoutSeq)
+        {
+            //if (Types.Count == 1 && Types.First().Sequence is Single)
+            //    return previousItem.Overcome;
 
+            foreach(var type in Types)
+            {
+                foreach (var typePrev in previousItem.Types)
+                {
+                    if (type.Equals(typePrev) || (withoutSeq && type.Name == typePrev.Name && type.Overcome == typePrev.Overcome))
+                        return type.Overcome;
+                }
+            }
+            return 1;
+        }
         private void CreatePanel()
         {
             NewPanel = new Panel();
@@ -151,17 +168,18 @@ namespace Go.Items
                 }
             }
         }
-        public void FixNearItems()//здесь можно оптимизировать создав проверку на повторимость пересечения с оной и той же последовательностью 
+        private void FixNearItems()
         {
             List<ItemDistanceTo> nearFixedList = new List<ItemDistanceTo>();
+
             foreach (var near in NearItems)
             {
                 Ray FromMainToFix = new Ray(CurrentPoint, near.CurrentItem.CurrentPoint);
-                foreach(var near2 in NearItems)
+                foreach (var near2 in NearItems)
                 {
                     foreach (var type in near2.CurrentItem.Types)
                     {
-                        if (type.Sequence.Cross(FromMainToFix))
+                        if (type.Sequence.Cross(FromMainToFix, false))
                         {
                             nearFixedList.Add(near);
                             break;
@@ -171,12 +189,67 @@ namespace Go.Items
             }
             DifferenceNears(nearFixedList);
         }
-        public void DifferenceNears(List<ItemDistanceTo> listFixed)
+        private void DifferenceNears(List<ItemDistanceTo> listFixed)
         {
             foreach(var itemFixed in listFixed)
             {
                 NearItems.Remove(itemFixed);
                 ItemDistanceTo.RemoveItem(itemFixed.CurrentItem.NearItems, this);
+            }
+        }
+        public void SplitNearItems()
+        {
+            foreach(var type in Types)
+            {
+                if(type.IsImpossible && !(type.Sequence is Items.Single))
+                {
+                    if(type.Sequence is Items.Line)
+                    {
+                        if (type.Sequence.items.First().Equals(this) || type.Sequence.items.Last().Equals(this))
+                            break;
+                    }
+                    try
+                    {
+                        Ray nextRay = new Ray(CurrentPoint, Next.CurrentPoint);
+                        Ray previousRay = new Ray(Previous.CurrentPoint, CurrentPoint);
+                        bool orietntation = true;
+                        foreach (var item in NearItems)
+                        {
+                            if (previousRay.IsCross(nextRay))
+                            {
+                                if (previousRay.OnRight(item.CurrentItem.CurrentPoint) != nextRay.OnRight(item.CurrentItem.CurrentPoint))
+                                {
+
+                                    NearItemsPart_2.Add(item);
+                                }
+                                else
+                                {
+                                    NearItemsPart_1.Add(item);
+                                }
+                            }
+                            else
+                            {
+                                if (nextRay.OnRight(item.CurrentItem.CurrentPoint) == orietntation)
+                                {
+                                    NearItemsPart_1.Add(item);
+                                }
+                                else
+                                {
+                                    NearItemsPart_2.Add(item);
+                                }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Проблемы с разделением ближайших точек");
+                    }
+
+                }
+                else
+                {
+                    NearItemsPart_1 = NearItemsPart_2 = NearItems;
+                }
             }
         }
         public override bool Equals(Object point)
@@ -203,4 +276,16 @@ namespace Go.Items
             return points;
         }
     }
+
+    public class ImpossibleItem : Item
+    {
+        public Item itemLeft, itemRight;
+
+        public ImpossibleItem(List<Item> allItems, Form1 form, Point point, TypeItem typeLeft, TypeItem typeRight) : base(point)
+        {
+            itemLeft = new Item(allItems, form, new Point(point.X - 10, point.Y), typeLeft);
+            itemRight = new Item(allItems, form, new Point(point.X + 10, point.Y), typeRight);
+        }
+    }
+
 }

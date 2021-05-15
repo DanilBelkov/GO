@@ -35,12 +35,26 @@
             this.B_draw = new System.Windows.Forms.Button();
             this.label_Way = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.PanelWithTypes = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.B_to = new System.Windows.Forms.Button();
+            this.B_from = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.label_scale = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Landform_Plus = new System.Windows.Forms.ToolStripMenuItem();
+            this.Landform_Minus = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.B_Rock = new System.Windows.Forms.Button();
             this.B_RockyZone = new System.Windows.Forms.Button();
             this.B_GroupRocks = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.B_RockPlane = new System.Windows.Forms.Button();
             this.B_RockCliff = new System.Windows.Forms.Button();
             this.B_RockPit = new System.Windows.Forms.Button();
@@ -53,7 +67,6 @@
             this.B_MicroPit2 = new System.Windows.Forms.Button();
             this.B_MicroHillock = new System.Windows.Forms.Button();
             this.B_Caponier = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.B_Embankment = new System.Windows.Forms.Button();
             this.B_Washout = new System.Windows.Forms.Button();
             this.B_Pit = new System.Windows.Forms.Button();
@@ -83,7 +96,6 @@
             this.B_LEP = new System.Windows.Forms.Button();
             this.B_Walkway = new System.Windows.Forms.Button();
             this.B_Railway = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.B_Asphalt = new System.Windows.Forms.Button();
             this.B_ForbiddenPlace = new System.Windows.Forms.Button();
             this.B_Highway = new System.Windows.Forms.Button();
@@ -97,7 +109,6 @@
             this.B_Tree = new System.Windows.Forms.Button();
             this.B_Garden = new System.Windows.Forms.Button();
             this.B_FloraObject = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.B_HardForest = new System.Windows.Forms.Button();
             this.B_ImpossibleForest = new System.Windows.Forms.Button();
             this.B_HardShrub = new System.Windows.Forms.Button();
@@ -108,21 +119,14 @@
             this.B_WaterObject = new System.Windows.Forms.Button();
             this.B_SlimSwamp = new System.Windows.Forms.Button();
             this.B_WaterSource = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.B_Waterlogging = new System.Windows.Forms.Button();
             this.B_Swamp = new System.Windows.Forms.Button();
             this.B_River = new System.Windows.Forms.Button();
             this.B_ImpossibleSwamp = new System.Windows.Forms.Button();
             this.B_ImpossibleRiver = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.B_to = new System.Windows.Forms.Button();
-            this.B_from = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.B_open = new System.Windows.Forms.ToolStripButton();
             this.B_plus = new System.Windows.Forms.ToolStripButton();
             this.B_minus = new System.Windows.Forms.ToolStripButton();
-            this.label_scale = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.B_createPoints = new System.Windows.Forms.ToolStripButton();
             this.Tool_flora = new System.Windows.Forms.ToolStripLabel();
             this.Tool_hydrography = new System.Windows.Forms.ToolStripLabel();
@@ -132,16 +136,14 @@
             this.Tool_area = new System.Windows.Forms.ToolStripLabel();
             this.Tool_line = new System.Windows.Forms.ToolStripLabel();
             this.Tool_item = new System.Windows.Forms.ToolStripLabel();
-            this.Landform_Plus = new System.Windows.Forms.ToolStripMenuItem();
-            this.Landform_Minus = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.B_ClaenForest = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PanelWithTypes.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // smallImageList
@@ -174,7 +176,7 @@
             this.B_draw.BackColor = System.Drawing.Color.White;
             this.B_draw.Location = new System.Drawing.Point(126, 526);
             this.B_draw.Name = "B_draw";
-            this.B_draw.Size = new System.Drawing.Size(75, 23);
+            this.B_draw.Size = new System.Drawing.Size(23, 23);
             this.B_draw.TabIndex = 6;
             this.B_draw.Text = "нарисовать";
             this.B_draw.UseVisualStyleBackColor = false;
@@ -204,6 +206,7 @@
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.PanelWithTypes);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Controls.Add(this.B_to);
@@ -216,23 +219,22 @@
             this.splitContainer1.SplitterDistance = 1060;
             this.splitContainer1.TabIndex = 4;
             // 
-            // pictureBox1
+            // button1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1057, 627);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(173, 526);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "нарисовать";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // PanelWithTypes
             // 
             this.PanelWithTypes.AutoScroll = true;
             this.PanelWithTypes.BackColor = System.Drawing.Color.Azure;
+            this.PanelWithTypes.Controls.Add(this.B_ClaenForest);
             this.PanelWithTypes.Controls.Add(this.B_Rock);
             this.PanelWithTypes.Controls.Add(this.B_RockyZone);
             this.PanelWithTypes.Controls.Add(this.B_GroupRocks);
@@ -315,6 +317,141 @@
             this.PanelWithTypes.Size = new System.Drawing.Size(200, 495);
             this.PanelWithTypes.TabIndex = 14;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 404);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(192, 13);
+            this.label6.TabIndex = 91;
+            this.label6.Text = "Скалы и камни__________________";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 329);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(190, 13);
+            this.label5.TabIndex = 78;
+            this.label5.Text = "Рельеф________________________";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(194, 13);
+            this.label4.TabIndex = 47;
+            this.label4.Text = "Искуственные объекты___________";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "Растительность_________________";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(194, 13);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Гидрография____________________";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(83, 569);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 17);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "-------->";
+            // 
+            // B_to
+            // 
+            this.B_to.Location = new System.Drawing.Point(155, 566);
+            this.B_to.Name = "B_to";
+            this.B_to.Size = new System.Drawing.Size(41, 23);
+            this.B_to.TabIndex = 10;
+            this.B_to.Text = "до";
+            this.B_to.UseVisualStyleBackColor = true;
+            this.B_to.Click += new System.EventHandler(this.B_to_Click);
+            // 
+            // B_from
+            // 
+            this.B_from.Location = new System.Drawing.Point(27, 566);
+            this.B_from.Name = "B_from";
+            this.B_from.Size = new System.Drawing.Size(41, 23);
+            this.B_from.TabIndex = 9;
+            this.B_from.Text = "от";
+            this.B_from.UseVisualStyleBackColor = true;
+            this.B_from.Click += new System.EventHandler(this.B_from_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.B_open,
+            this.B_plus,
+            this.B_minus,
+            this.label_scale,
+            this.toolStripSeparator1,
+            this.B_createPoints,
+            this.Tool_flora,
+            this.Tool_hydrography,
+            this.Tool_artificalObject,
+            this.Tool_landform,
+            this.Tool_stone,
+            this.Tool_area,
+            this.Tool_line,
+            this.Tool_item});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1290, 25);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // label_scale
+            // 
+            this.label_scale.Name = "label_scale";
+            this.label_scale.Size = new System.Drawing.Size(35, 22);
+            this.label_scale.Text = "100%";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // Landform_Plus
+            // 
+            this.Landform_Plus.Name = "Landform_Plus";
+            this.Landform_Plus.Size = new System.Drawing.Size(32, 19);
+            // 
+            // Landform_Minus
+            // 
+            this.Landform_Minus.Name = "Landform_Minus";
+            this.Landform_Minus.Size = new System.Drawing.Size(32, 19);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1057, 627);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            // 
             // B_Rock
             // 
             this.B_Rock.BackgroundImage = global::Go.Properties.Resources.камень;
@@ -344,15 +481,6 @@
             this.B_GroupRocks.Size = new System.Drawing.Size(25, 25);
             this.B_GroupRocks.TabIndex = 93;
             this.B_GroupRocks.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 404);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(192, 13);
-            this.label6.TabIndex = 91;
-            this.label6.Text = "Скалы и камни__________________";
             // 
             // B_RockPlane
             // 
@@ -473,15 +601,6 @@
             this.B_Caponier.Size = new System.Drawing.Size(25, 25);
             this.B_Caponier.TabIndex = 79;
             this.B_Caponier.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 329);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 13);
-            this.label5.TabIndex = 78;
-            this.label5.Text = "Рельеф________________________";
             // 
             // B_Embankment
             // 
@@ -773,15 +892,6 @@
             this.B_Railway.TabIndex = 48;
             this.B_Railway.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 161);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(194, 13);
-            this.label4.TabIndex = 47;
-            this.label4.Text = "Искуственные объекты___________";
-            // 
             // B_Asphalt
             // 
             this.B_Asphalt.BackgroundImage = global::Go.Properties.Resources.асфальт;
@@ -888,7 +998,7 @@
             // 
             this.B_Tree.BackgroundImage = global::Go.Properties.Resources.дерево;
             this.B_Tree.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.B_Tree.Location = new System.Drawing.Point(108, 55);
+            this.B_Tree.Location = new System.Drawing.Point(139, 55);
             this.B_Tree.Name = "B_Tree";
             this.B_Tree.Size = new System.Drawing.Size(25, 25);
             this.B_Tree.TabIndex = 37;
@@ -908,20 +1018,11 @@
             // 
             this.B_FloraObject.BackgroundImage = global::Go.Properties.Resources.куст;
             this.B_FloraObject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.B_FloraObject.Location = new System.Drawing.Point(141, 55);
+            this.B_FloraObject.Location = new System.Drawing.Point(170, 55);
             this.B_FloraObject.Name = "B_FloraObject";
             this.B_FloraObject.Size = new System.Drawing.Size(25, 25);
             this.B_FloraObject.TabIndex = 33;
             this.B_FloraObject.UseVisualStyleBackColor = true;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(191, 13);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "Растительность_________________";
             // 
             // B_HardForest
             // 
@@ -947,7 +1048,7 @@
             // 
             this.B_HardShrub.BackgroundImage = global::Go.Properties.Resources.труднопробегаемые_кусты;
             this.B_HardShrub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.B_HardShrub.Location = new System.Drawing.Point(172, 24);
+            this.B_HardShrub.Location = new System.Drawing.Point(170, 24);
             this.B_HardShrub.Name = "B_HardShrub";
             this.B_HardShrub.Size = new System.Drawing.Size(25, 25);
             this.B_HardShrub.TabIndex = 27;
@@ -967,7 +1068,7 @@
             // 
             this.B_MiddleShrub.BackgroundImage = global::Go.Properties.Resources.легкопробегаемые_кусты;
             this.B_MiddleShrub.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.B_MiddleShrub.Location = new System.Drawing.Point(141, 24);
+            this.B_MiddleShrub.Location = new System.Drawing.Point(139, 24);
             this.B_MiddleShrub.Name = "B_MiddleShrub";
             this.B_MiddleShrub.Size = new System.Drawing.Size(25, 25);
             this.B_MiddleShrub.TabIndex = 26;
@@ -1028,15 +1129,6 @@
             this.B_WaterSource.UseVisualStyleBackColor = true;
             this.B_WaterSource.Click += new System.EventHandler(this.B_WaterSource_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 83);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(194, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Гидрография____________________";
-            // 
             // B_Waterlogging
             // 
             this.B_Waterlogging.BackgroundImage = global::Go.Properties.Resources.заболоченность;
@@ -1092,61 +1184,6 @@
             this.B_ImpossibleRiver.UseVisualStyleBackColor = true;
             this.B_ImpossibleRiver.Click += new System.EventHandler(this.B_ImpossibleRiver_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(83, 569);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "-------->";
-            // 
-            // B_to
-            // 
-            this.B_to.Location = new System.Drawing.Point(155, 566);
-            this.B_to.Name = "B_to";
-            this.B_to.Size = new System.Drawing.Size(41, 23);
-            this.B_to.TabIndex = 10;
-            this.B_to.Text = "до";
-            this.B_to.UseVisualStyleBackColor = true;
-            this.B_to.Click += new System.EventHandler(this.B_to_Click);
-            // 
-            // B_from
-            // 
-            this.B_from.Location = new System.Drawing.Point(27, 566);
-            this.B_from.Name = "B_from";
-            this.B_from.Size = new System.Drawing.Size(41, 23);
-            this.B_from.TabIndex = 9;
-            this.B_from.Text = "от";
-            this.B_from.UseVisualStyleBackColor = true;
-            this.B_from.Click += new System.EventHandler(this.B_from_Click);
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.toolStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.B_open,
-            this.B_plus,
-            this.B_minus,
-            this.label_scale,
-            this.toolStripSeparator1,
-            this.B_createPoints,
-            this.Tool_flora,
-            this.Tool_hydrography,
-            this.Tool_artificalObject,
-            this.Tool_landform,
-            this.Tool_stone,
-            this.Tool_area,
-            this.Tool_line,
-            this.Tool_item});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1290, 25);
-            this.toolStrip1.TabIndex = 7;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
             // B_open
             // 
             this.B_open.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1181,18 +1218,6 @@
             this.B_minus.Text = "toolStripButton2";
             this.B_minus.ToolTipText = "Уменьшить";
             this.B_minus.Click += new System.EventHandler(this.B_minus_Click);
-            // 
-            // label_scale
-            // 
-            this.label_scale.Name = "label_scale";
-            this.label_scale.Size = new System.Drawing.Size(35, 22);
-            this.label_scale.Text = "100%";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // B_createPoints
             // 
@@ -1321,15 +1346,16 @@
             this.Tool_item.Text = "toolStripButton3";
             this.Tool_item.ToolTipText = "Объект";
             // 
-            // Landform_Plus
+            // B_ClaenForest
             // 
-            this.Landform_Plus.Name = "Landform_Plus";
-            this.Landform_Plus.Size = new System.Drawing.Size(32, 19);
-            // 
-            // Landform_Minus
-            // 
-            this.Landform_Minus.Name = "Landform_Minus";
-            this.Landform_Minus.Size = new System.Drawing.Size(32, 19);
+            this.B_ClaenForest.BackgroundImage = global::Go.Properties.Resources.чистый_лес;
+            this.B_ClaenForest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.B_ClaenForest.Location = new System.Drawing.Point(108, 55);
+            this.B_ClaenForest.Name = "B_ClaenForest";
+            this.B_ClaenForest.Size = new System.Drawing.Size(25, 25);
+            this.B_ClaenForest.TabIndex = 98;
+            this.B_ClaenForest.UseVisualStyleBackColor = true;
+            this.B_ClaenForest.Click += new System.EventHandler(this.B_ClaenForest_Click);
             // 
             // Form1
             // 
@@ -1347,11 +1373,11 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.PanelWithTypes.ResumeLayout(false);
             this.PanelWithTypes.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1463,6 +1489,8 @@
         private System.Windows.Forms.Button B_Pit;
         private System.Windows.Forms.Button B_Cliff;
         private System.Windows.Forms.Button B_Ditch;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button B_ClaenForest;
     }
 }
 

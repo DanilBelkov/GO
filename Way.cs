@@ -7,60 +7,61 @@ using Go.Items;
 
 namespace Go
 {
-    class Point_A_Star
+    class Item_A_Star
     {
-        public Item starPoint;
+        public Item item;
         public double currentDistance;
         public double heuristic;
         public double finallyDistance;
-        public Point_A_Star previousPoint;
+        public Item_A_Star previousStar;
     }
     class Way
     {
         public double distance;
-        public List<Point_A_Star> pointOnWay = new List<Point_A_Star>();
+        public List<Item_A_Star> pointsOnWay = new List<Item_A_Star>();
     
-        public List<Point_A_Star> visitedPointGraph = new List<Point_A_Star>();
-        List<Point_A_Star> openPoinst = new List<Point_A_Star>();
+        public List<Item_A_Star> visitedPointGraph = new List<Item_A_Star>();
+        List<Item_A_Star> openPoinst = new List<Item_A_Star>();
 
         public Way() { }
 
-        public List<Item> P_A_StoSuperPoint(List<Point_A_Star> list_PAS)
+        public List<Item> P_A_StoSuperPoint(List<Item_A_Star> list_PAS)
         {
             if (list_PAS != null)
             {
                 List<Item> list = new List<Item>();
-                foreach (Point_A_Star item in list_PAS)
+                foreach (Item_A_Star item in list_PAS)
                 {
-                    list.Add(item.starPoint);
+                    list.Add(item.item);
                 }
                 return list;
             }
             return null;
         }
 
-        public bool findPointAStar(List<Point_A_Star> list, Point_A_Star point)
+        public bool findPointAStar(List<Item_A_Star> list, Item_A_Star point)
         {
-            foreach(Point_A_Star item in list)
+            foreach(Item_A_Star item in list)
             {
-                if (item.starPoint.Equals(point.starPoint))
+                if (item.item.Equals(point.item))
                     return true;
             }
             return false;
         }
-        public void FindWay(Item startP, Item endP)
-        {
-            
+        public void FindWay(Item start, Item end, TypeItem startType)
+        {   
             List<int> overcomes = new List<int>();
+            TypeItem _tempType = startType;
+            bool first = true;
             ///////// основой карты всегда белая область(лес)
-            //overcomes.Add(10);
-            Point_A_Star _tempPoint;//= new Point_A_Star();
-            Point_A_Star _curP = new Point_A_Star();
-            _curP.starPoint = startP;
-            _curP.currentDistance = 0;
-            _curP.heuristic = 0;
-            _curP.finallyDistance = 50000;
-            _curP.previousPoint = null;
+            //overcomes.Add(startOvercome);
+            Item_A_Star _tempPoint;//= new Point_A_Star();
+            Item_A_Star _curentStar = new Item_A_Star();
+            _curentStar.item = start;
+            _curentStar.currentDistance = 0;
+            _curentStar.heuristic = 0;
+            _curentStar.finallyDistance = double.MaxValue;
+            _curentStar.previousStar = null;
 
             //overcomes.Add(_curP.starPoint.overcome);// добавляем стартовую проходимость
             //int MinOvercome = overcomes.Last();
@@ -68,16 +69,16 @@ namespace Go
             try
             {
                 //пока текущий не стал конечным
-                while (!_curP.starPoint.Equals(endP))
+                while (!_curentStar.item.Equals(end))
                 {
                     //записываем в просмотренные
-                    visitedPointGraph.Add(_curP);
+                    visitedPointGraph.Add(_curentStar);
                     //перебираем ближние
-                    foreach (ItemDistanceTo item in _curP.starPoint.NearItems)
+                    foreach (ItemDistanceTo item in _curentStar.item.NearItems)
                     {
-                        _tempPoint = new Point_A_Star();
-                        _tempPoint.starPoint = item.CurrentItem;
-                        _tempPoint.currentDistance = _curP.currentDistance + item.distance;// * overcomes.Last(); ///////add overcome
+                        _tempPoint = new Item_A_Star();
+                        _tempPoint.item = item.CurrentItem;
+                        _tempPoint.currentDistance = _curentStar.currentDistance + item.distance;// * item.CurrentItem.GetOvercome(_tempType, first); ///////add overcome
 
                         ////если проходимость одна и таже
                         //if (overcomes.Last() == item.CurrentItem.Overcome)
@@ -94,12 +95,12 @@ namespace Go
                         //}
 
 
-                        _tempPoint.heuristic = item.CurrentItem.GetDistanceTo(endP);
+                        _tempPoint.heuristic = item.CurrentItem.GetDistanceTo(end);
                         _tempPoint.finallyDistance = _tempPoint.currentDistance + _tempPoint.heuristic;
-                        _tempPoint.previousPoint = _curP;
+                        _tempPoint.previousStar = _curentStar;
 
                         //смотрим есть ли точка в каком-то из списков
-                        if (!findPointAStar(openPoinst, _tempPoint) && !findPointAStar(visitedPointGraph, _tempPoint))
+                        if (!findPointAStar(visitedPointGraph, _tempPoint) && !findPointAStar(openPoinst, _tempPoint))
                         {
                             //записываем в открытый список
                             openPoinst.Add(_tempPoint);
@@ -110,14 +111,14 @@ namespace Go
                     {
                         return;
                     }
-                    Point_A_Star Temp = _curP;
-                    _curP = openPoinst[0];//теперь это пока минимальный
-                    foreach (Point_A_Star item in openPoinst)
+                    Item_A_Star Temp = _curentStar;
+                    _curentStar = openPoinst[0];//теперь это пока минимальный
+                    foreach (Item_A_Star star in openPoinst)
                     {
                         //ищем минмальный из ближайших  
-                        if (item.finallyDistance <= _curP.finallyDistance)
+                        if (star.finallyDistance <= _curentStar.finallyDistance)
                         {
-                            _curP = item;
+                            _curentStar = star;
                         }
                     }
                     //добавляем "скобку"
@@ -131,20 +132,20 @@ namespace Go
                     //else  // если разные коэффы, то ищем минимальный 
                     //    MinOvercome = Math.Min(overcomes[overcomes.Count - 1], overcomes[overcomes.Count - 2]);
                     //убираем из открытого списка, потом занесем его в посещеные
-                    openPoinst.Remove(_curP);
+                    openPoinst.Remove(_curentStar);
                     //openPoinst.Clear();
 
                 }
-                visitedPointGraph.Add(_curP);
-                this.distance = _curP.finallyDistance;
+                visitedPointGraph.Add(_curentStar);
+                this.distance = _curentStar.finallyDistance;
 
                 //восстанавливаем путь по ссылкам на предыдущие 
-                while (_curP != null)
+                while (_curentStar != null)
                 {
-                    pointOnWay.Add(_curP);
-                    _curP = _curP.previousPoint;
+                    pointsOnWay.Add(_curentStar);
+                    _curentStar = _curentStar.previousStar;
                 }
-                pointOnWay.Reverse();
+                pointsOnWay.Reverse();
             }
             catch
             {
