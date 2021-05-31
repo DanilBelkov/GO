@@ -33,5 +33,26 @@ namespace Go
             else
                 return true;
         }
+
+        public Point Cross(Ray ray, bool isFirst)
+        {
+            double l = Math.Sqrt(ray.A * ray.A + ray.B * ray.B);
+            double dx = ray.A / l; // потому что направляющие вектора
+            double dy = ray.B / l;
+
+            double x, y;
+            if (isFirst)
+            {
+                x = currentPoint.X + dx * radius;
+                y = currentPoint.Y + dy * radius;
+            }
+            else
+            { 
+                x = currentPoint.X - dx * radius;
+                y = currentPoint.Y - dy * radius;
+            }
+
+            return new Point((int)x, (int)y);
+        }
     } 
 }

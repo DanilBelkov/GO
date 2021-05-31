@@ -12,6 +12,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using Go.Items;
 
+
 namespace Go
 {
 
@@ -36,11 +37,14 @@ namespace Go
        
         private TypeItem _typeItem;
         private TypeItem _typeItemInner;
+        private TypeItem _typeItemOuter;
         private Item _item;
 
         private List<Item> _allItems = new List<Item>();
         private List<Item> _tempItems = new List<Item>();
         private List<Item> _tempItemsInner = new List<Item>();
+        private List<Item> _tempItemsOuter = new List<Item>();
+
         private List<Items.Single> _allSingles = new List<Items.Single>();
         private List<Items.Line> _allLines = new List<Items.Line>();
         private List<Items.Area> _allAreas = new List<Items.Area>();
@@ -192,7 +196,7 @@ namespace Go
 
             label_scale.Text = Scale_img.ToString() + "%"; // сообщаем это пользователю
 
-            CreateTempPanel(new Point(0, 0), 6);
+            //CreateTempPanel(new Point(0, 0), 6);
 
         }
 
@@ -223,7 +227,7 @@ namespace Go
 
             label_scale.Text = Scale_img.ToString() + "%";
 
-            CreateTempPanel(new Point(0,0), 6);
+            //CreateTempPanel(new Point(0,0), 6);
         }
 
         //рисуем граф 
@@ -233,8 +237,8 @@ namespace Go
             Graphics g = pictureBox1.CreateGraphics();
             foreach (var item in _allItems)
             {
-                item.SplitNearItems();
-                foreach (ItemDistanceTo nearItem in item.NearItemsPart_1)
+                //item.DrawCircle();
+                foreach (ItemDistanceTo nearItem in item.NearItems)
                 {
                     g.DrawLine(new Pen(Brushes.Purple, 1), item.CurrentPoint.X * Scale_img / 100, item.CurrentPoint.Y * Scale_img / 100,
                         nearItem.CurrentItem.CurrentPoint.X * Scale_img / 100, nearItem.CurrentItem.CurrentPoint.Y * Scale_img / 100);
@@ -271,12 +275,12 @@ namespace Go
             {
                 Point betweenPoint;
                 Item betweenItem;
+                TypeItem generalType = type.IsImpossible ? _typeItem : null;
                 while (ray.Lenght() > 20)
                 {
-
                     betweenPoint = new Point(items.Last().CurrentPoint.X + (int)((ray.Coordinate.X / ray.Lenght()) * 20),
                         items.Last().CurrentPoint.Y + (int)((ray.Coordinate.Y / ray.Lenght()) * 20));
-                    betweenItem = new Item(_allItems, this, betweenPoint, type);
+                    betweenItem = new Item(_allItems, this, betweenPoint, type, generalType);
                     betweenItem.Previous = items.Last();
                     items.Last().Next = betweenItem;
                     items.Add(betweenItem);
@@ -286,32 +290,108 @@ namespace Go
                 }
             }
         }
+        private void ReplaceItem()
+        {
+            _item = _tempItems[_tempItems.Count - 2];
+            pictureBox1.Controls.Remove(_item.NewPanel);
+            panel_list.Remove(_item.NewPanel);
+
+            _item = new ImpossibleItem(_allItems, this, _typeItem, _typeItemInner, _typeItemOuter);
+            ImpossibleItem item = _item as ImpossibleItem;
+            _allItems.Add(item.itemInner);
+            _allItems.Add(item.itemOuter);
+
+            if (!(_typeItem.Sequence is Area && _tempItems.Count == 3))
+            {
+
+                FragmentSequence(_tempItemsInner, _typeItemInner, item.itemInner.CurrentPoint);
+                FragmentSequence(_tempItemsOuter, _typeItemOuter, item.itemOuter.CurrentPoint);
+
+                item.itemInner.Previous = _tempItemsInner.Last();
+                _tempItemsInner.Last().Next = item.itemInner;
+
+                item.itemOuter.Previous = _tempItemsOuter.Last();
+                _tempItemsOuter.Last().Next = item.itemOuter;
+            }
+            _tempItemsInner.Add(item.itemInner);
+            _tempItemsOuter.Add(item.itemOuter);
+
+            _typeItemInner.Sequence.SetItems(_tempItemsInner);
+            _typeItemOuter.Sequence.SetItems(_tempItemsOuter);
+        }
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             if (pictureBox1.Image != null)//если есть картинка
             {
                 if (Btn_create_P && _typeItem != null)//если была нажата кнопка создания координат привязки
                 {
-                    if(e.Button == MouseButtons.Right && _tempItems.Count != 0 )
+                    if (e.Button == MouseButtons.Right && _tempItems.Count != 0)
                     {
-                        if(_typeItem.Sequence is Items.Line)
+                        if (_typeItem.Sequence is Items.Line)
                         {
+                            if (_typeItem.IsImpossible)
+                            {
+                                FragmentSequence(_tempItemsInner, _typeItemInner, _tempItems.Last().CurrentPoint);
+                                FragmentSequence(_tempItemsOuter, _typeItemOuter, _tempItems.Last().CurrentPoint);
+
+                                _tempItems[_tempItems.Count - 1] = new Item(_allItems, this, _tempItems.Last().CurrentPoint, _typeItem, _typeItem);
+
+                                _tempItemsInner.Add(_tempItems.Last());
+                                _tempItemsOuter.Add(_tempItems.Last());
+
+                                _typeItemInner.Sequence.SetItems(_tempItemsInner);
+                                _typeItemOuter.Sequence.SetItems(_tempItemsOuter);
+
+                                _allItems.Add(_tempItems.Last());
+                            }
                             _allLines.Add(_typeItem.Sequence as Items.Line);
                         }
-                        else if(_typeItem.Sequence is Items.Area)
+                        else if (_typeItem.Sequence is Items.Area)
                         {
-                            FragmentSequence(_tempItems, _typeItem, _tempItems.First().CurrentPoint);
+                            if (_typeItem.IsImpossible)
+                            {
+                                _tempItems.Add(_tempItems.First());
+                                _typeItem.Sequence.SetItems(_tempItems);
+                                ReplaceItem();
 
-                            _tempItems.Last().Next = _tempItems.First();
-                            _tempItems.First().Previous = _tempItems.Last();
-                            _typeItem.Sequence.SetItems(_tempItems);
+                                _tempItems.Add(_tempItems[1]);
+                                _typeItem.Sequence.SetItems(_tempItems);
+                                ReplaceItem();
 
-                            _allAreas.Add(_typeItem.Sequence as Items.Area);
+                                FragmentSequence(_tempItemsInner, _typeItemInner, _tempItemsInner.First().CurrentPoint);
+                                FragmentSequence(_tempItemsOuter, _typeItemOuter, _tempItemsOuter.First().CurrentPoint);
+
+                                _tempItemsInner.Last().Next = _tempItemsInner.First();
+                                _tempItemsInner.First().Previous = _tempItemsInner.Last();
+                                _tempItemsOuter.Last().Next = _tempItemsOuter.First();
+                                _tempItemsOuter.First().Previous = _tempItemsOuter.Last();
+
+                                _typeItemInner.Sequence.SetItems(_tempItemsInner);
+                                _typeItemOuter.Sequence.SetItems(_tempItemsOuter);
+
+                                _allAreas.Add(_typeItemInner.Sequence as Area);
+                                _allAreas.Add(_typeItemOuter.Sequence as Area);
+                            }
+                            else
+                            {
+                                FragmentSequence(_tempItems, _typeItem, _tempItems.First().CurrentPoint);
+
+                                _tempItems.Last().Next = _tempItems.First();
+                                _tempItems.First().Previous = _tempItems.Last();
+                                _typeItem.Sequence.SetItems(_tempItems);
+
+                                _allAreas.Add(_typeItem.Sequence as Items.Area);
+                            }
+
                         }
+                        _tempItems.Clear();
+                        _tempItemsInner.Clear();
+                        _tempItemsOuter.Clear();
+
                         _typeItem = _typeItem.GetCopy();
                         _typeItemInner = _typeItem.GetCopy();
-                        DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
-                        _tempItems.Clear();
+                        _typeItemInner = _typeItem.GetCopy();
+                        //DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
                     }
                     else if (e.Button == MouseButtons.Left)
                     {
@@ -321,12 +401,17 @@ namespace Go
 
                         if (_typeItem.Sequence is Items.Single)
                         {
+                            //_item = new Item(localPoint, this, _typeItem);
+                            //_tempItems.Add(_item);
+                            //_typeItem.Sequence.SetItems(_tempItems);
+
                             _item = new Item(_allItems, this, localPoint, _typeItem);
                             _tempItems.Add(_item);
                             _typeItem.Sequence.SetItems(_tempItems);
                             _allSingles.Add(_typeItem.Sequence as Items.Single);
+                            _allItems.Add(_item);
 
-                            DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
+                            //DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
                             _tempItems.Clear();
 
                             _typeItem = _typeItem.GetCopy();
@@ -337,19 +422,15 @@ namespace Go
                             {
                                 if (_typeItem.IsImpossible)
                                 {
-                                    _item = new ImpossibleItem(_allItems, this, localPoint, _typeItem, _typeItemInner);
-                                    FragmentSequence(_tempItemsInner, _typeItemInner, _item.CurrentPoint);
-                                    FragmentSequence(_tempItems, _typeItem, _item.CurrentPoint);
+                                    //_item = new Item(_allItems, this, localPoint, _typeItem, _typeItem);
+                                    _item = new Item(localPoint, this, _typeItem);
+                                    _tempItems.Add(_item);
+                                    _typeItem.Sequence.SetItems(_tempItems);
 
-                                    ImpossibleItem item = _item as ImpossibleItem;
-                                    item.itemLeft.Previous = _tempItems.Last();
-                                    _tempItems.Last().Next = item.itemLeft;
-
-                                    item.itemRight.Previous = _tempItemsInner.Last();
-                                    _tempItemsInner.Last().Next = item.itemRight;
-
-                                    _allItems.Add(item.itemLeft);
-                                    _allItems.Add(item.itemRight);
+                                    if (_tempItems.Count >= 3)
+                                    {
+                                        ReplaceItem();
+                                    }
                                 }
                                 else
                                 {
@@ -357,33 +438,42 @@ namespace Go
                                     // Добавляем промежуточные точки 
                                     FragmentSequence(_tempItems, _typeItem, _item.CurrentPoint);
 
+                                    _allItems.Add(_item);
+
                                     _item.Previous = _tempItems.Last();
                                     _tempItems.Last().Next = _item;
 
-                                    _allItems.Add(_item);
+                                    _tempItems.Add(_item);
+                                    _typeItem.Sequence.SetItems(_tempItems);
+
                                 }
-                            }
-                            if (_typeItem.IsImpossible)
-                            {
-                                ImpossibleItem item = _item as ImpossibleItem;
-                                _tempItems.Add(item.itemLeft);
-                                _tempItemsInner.Add(item.itemRight);
-
-                                _typeItem.Sequence.SetItems(_tempItems);
-                                _typeItemInner.Sequence.SetItems(_tempItemsInner);
-
-                                DrawConnections(_tempItemsInner, new Pen(Brushes.Purple, 1));
                             }
                             else
                             {
+                                _item = new Item(_allItems, this, localPoint, _typeItem);
+                                    
                                 _tempItems.Add(_item);
                                 _typeItem.Sequence.SetItems(_tempItems);
+
+                                if (_typeItem.IsImpossible)
+                                {
+                                    if (_typeItem.Sequence is Line)
+                                    {
+                                        _allItems.Add(_item);
+                                        _tempItemsInner.Add(_item);
+                                        _tempItemsOuter.Add(_item);
+
+                                        _typeItemInner.Sequence.SetItems(_tempItemsInner);
+                                        _typeItemOuter.Sequence.SetItems(_tempItemsOuter);
+                                    }
+                                }
+                                else
+                                    _allItems.Add(_item);
                             }
 
-                            DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
-                            
+                            //DrawConnections(_tempItems, new Pen(Brushes.Purple, 1));
                         }
-                        
+
                         label_Way.Text = _item.CurrentPoint + "|id = " + _item.ID;
                     }
 
@@ -533,7 +623,9 @@ namespace Go
         {
             Panel tempPanel = (Panel)sender;
             label_Way.Text = tempPanel.Name + "--";
-            foreach(var item in _allItems[int.Parse(tempPanel.Name)].Types)
+            Item existItem = _allItems.Find(x => x.ID == int.Parse(tempPanel.Name));
+
+            foreach (var item in existItem.Types)
             {
                 label_Way.Text += " " + item.Name + ",";
             }
@@ -541,7 +633,6 @@ namespace Go
             if (Btn_create_P)
             {
                 // пока сделаю без связей на соседние до и после
-                Item existItem = _allItems[int.Parse(tempPanel.Name)];
                 _tempItems.Add(existItem);
                 _typeItem.Sequence.SetItems(_tempItems);
                 existItem.Types.Add(_typeItem);
@@ -560,9 +651,10 @@ namespace Go
                 if (Btn_item_from)
                 {
                     if (item_from != null)
-                        panel_list[item_from.ID].BackgroundImage = Properties.Resources.Point;
-                    item_from = _allItems[int.Parse(tempPanel.Name)];
+                        panel_list.Find(x => x.Name == item_to.ID.ToString()).BackgroundImage = Properties.Resources.Point;
+                    item_from = _allItems.Find(x => x.ID == int.Parse(tempPanel.Name));//_allItems[int.Parse(tempPanel.Name)];
                     B_from.Text = item_from.ID.ToString();
+                    toolB_start.Text = item_from.ID.ToString();
 
                     Btn_item_from = !Btn_item_from;
                     tempPanel.BackgroundImage = Properties.Resources.EnabledPoint;
@@ -570,10 +662,11 @@ namespace Go
                 if (Btn_item_to)
                 {
                     if (item_to != null)
-                        panel_list[item_to.ID].BackgroundImage = Properties.Resources.Point;
+                        panel_list.Find(x => x.Name == item_to.ID.ToString()).BackgroundImage = Properties.Resources.Point;
 
-                    item_to = _allItems[int.Parse(tempPanel.Name)];
+                    item_to = _allItems.Find(x => x.ID == int.Parse(tempPanel.Name)); //_allItems[int.Parse(tempPanel.Name)];
                     B_to.Text = item_to.ID.ToString();
+                    toolB_finish.Text = item_to.ID.ToString();
 
                     Btn_item_to = !Btn_item_to;
                     tempPanel.BackgroundImage = Properties.Resources.EnabledPoint;
@@ -681,18 +774,21 @@ namespace Go
         {
             _typeItem = new Lake();
             _typeItemInner = _typeItem.GetCopy();
+            _typeItemOuter = _typeItem.GetCopy();
             ChangeBackColors((Button)sender, Tool_hydrography, Tool_area);    
         }
 
         private void B_ImpossibleRiver_Click(object sender, EventArgs e)
         {
             _typeItem = new ImpassableRiver();
+            _typeItemInner = _typeItem.GetCopy();
+            _typeItemOuter = _typeItem.GetCopy();
             ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
         }
 
         private void B_River_Click(object sender, EventArgs e)
         {
-            _typeItem = new Pond();
+            _typeItem = new River();
             ChangeBackColors((Button)sender, Tool_hydrography, Tool_line);
         }
 
@@ -742,20 +838,6 @@ namespace Go
         {
             _typeItem = new WaterObject();
             ChangeBackColors((Button)sender, Tool_hydrography, Tool_item);
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            Graphics g = pictureBox1.CreateGraphics();
-            foreach (var item in _allItems)
-            {
-                item.SplitNearItems();
-                foreach (ItemDistanceTo nearItem in item.NearItemsPart_2)
-                {
-                    g.DrawLine(new Pen(Brushes.Purple, 1), item.CurrentPoint.X * Scale_img / 100, item.CurrentPoint.Y * Scale_img / 100,
-                        nearItem.CurrentItem.CurrentPoint.X * Scale_img / 100, nearItem.CurrentItem.CurrentPoint.Y * Scale_img / 100);
-                }
-            }
         }
 
         private void B_ClaenForest_Click(object sender, EventArgs e)

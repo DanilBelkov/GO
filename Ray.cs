@@ -22,6 +22,13 @@ namespace Go
             Coordinate = new Point(tP.X - fP.X, tP.Y - fP.Y);
         }
 
+        public Ray(int A, int B, int C)
+        {
+            this.A = A;
+            this.B = B;
+            this.C = C;
+            from_P = to_P = Coordinate = Point.Empty;
+        }
         public override bool Equals(Object ray)
         {
             if ((ray == null) || !this.GetType().Equals(ray.GetType()))
@@ -41,8 +48,6 @@ namespace Go
             Point pCross = Point.Empty;
             if (!this.Equals(two))
             {
-                //pCross.X = ((two.from_P.Y-from_P.Y)*B*two.B + two.from_P.X*two.A*B - from_P.X*A*two.B)/(two.A*B-A*two.B);
-                //pCross.Y = (from_P.Y*B - pCross.X*A + from_P.X*A)/B;
                 try
                 {
                     pCross.X = (B * two.C - two.B * C) / (A * two.B - two.A * B);
@@ -121,17 +126,21 @@ namespace Go
         }
         public bool OnRight(Point point)
         {
-            int D = (point.X - from_P.X) * (-A) - (point.Y - from_P.Y) * B;
+            int D = (point.X - from_P.X) * A - (point.Y - from_P.Y) * B;
             if (D > 0)
                 return true;
             else
                 return false;
         }
-        public bool Include(Point point)
+        public bool Include(Point point, bool withEdge)
         {
-            int D = (point.X - from_P.X) * (-A) - (point.Y - from_P.Y) * B;
+            int D = (point.X - from_P.X) * A - (point.Y - from_P.Y) * B;
             if (D == 0)
+            {
+                if (!withEdge && (point == from_P || point == to_P))
+                    return false;
                 return true;
+            }
             else
                 return false;
         }
@@ -159,6 +168,20 @@ namespace Go
             }
 
             return new Ray(new Point(x1, y1), new Point(x2, y2));
+        }
+        public Ray Rotate_90(Point rotatePoint)
+        {
+            this.Move(Point.Empty);
+            Point fromPoint = new Point(-from_P.Y, from_P.X);
+            Point toPoint = new Point(-to_P.Y, to_P.X);
+            Ray ray = new Ray(fromPoint, toPoint);
+
+            return ray.Move(rotatePoint);
+        }
+        public Ray GetParallelRay(float distance, bool left)
+        {
+            int otherC = (int)(distance * Math.Sqrt(A * A + B * B) * (left ? -1 : 1) + C);
+            return new Ray(A, B, otherC);
         }
     }
 }

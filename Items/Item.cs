@@ -55,8 +55,6 @@ namespace Go.Items
         public Item Next = null, Previous = null;
         public Point CurrentPoint { get; private set; }
         public List<ItemDistanceTo> NearItems = new List<ItemDistanceTo>();
-        public List<ItemDistanceTo> NearItemsPart_1 = new List<ItemDistanceTo>();
-        public List<ItemDistanceTo> NearItemsPart_2 = new List<ItemDistanceTo>();
         public Circle CurrentCircle;
 
         protected Form1 _form;
@@ -69,14 +67,16 @@ namespace Go.Items
             ID = _id++;
             CurrentPoint = point;
         }
-        public Item(List<Item> allItems, Form1 form, TypeItem type)
+        public Item(Point point, Form1 form, TypeItem type)
         {
             ID = _id++;
+            CurrentPoint = point;
             _form = form;
             Types.Add(type);
-            FindNearItems(allItems);
+            CreatePanel();
+            //FindNearItems(allItems);
         }
-        public Item(List<Item> allItems, Form1 form, Point point, TypeItem type)
+        public Item(List<Item> allItems, Form1 form, Point point, TypeItem type, TypeItem ImpassibleType = null)
         {
             ID = _id++;
             CurrentPoint = point;
@@ -85,8 +85,7 @@ namespace Go.Items
             Types.Add(type);
             CreatePanel();
             FindNearItems(allItems);
-            FixNearItems();
-            //SplitNearItems();
+            FixNearItems(ImpassibleType, type);
         }
 
         public void SetPosition(Point point)
@@ -168,21 +167,28 @@ namespace Go.Items
                 }
             }
         }
-        private void FixNearItems()
+        private void FixNearItems(TypeItem ImpassibleType, TypeItem typeself)
         {
             List<ItemDistanceTo> nearFixedList = new List<ItemDistanceTo>();
 
             foreach (var near in NearItems)
             {
                 Ray FromMainToFix = new Ray(CurrentPoint, near.CurrentItem.CurrentPoint);
-                foreach (var near2 in NearItems)
+                if ((typeself.Sequence.items != null && typeself.Sequence.Cross(FromMainToFix, false)) || (ImpassibleType != null && ImpassibleType.Sequence.Cross(FromMainToFix, false)))
                 {
-                    foreach (var type in near2.CurrentItem.Types)
+                    nearFixedList.Add(near);
+                }
+                else
+                {
+                    foreach (var near2 in NearItems)
                     {
-                        if (type.Sequence.Cross(FromMainToFix, false))
+                        foreach (var type in near2.CurrentItem.Types)
                         {
-                            nearFixedList.Add(near);
-                            break;
+                            if (type.Sequence.Cross(FromMainToFix, false))
+                            {
+                                nearFixedList.Add(near);
+                                break;
+                            }
                         }
                     }
                 }
@@ -195,61 +201,6 @@ namespace Go.Items
             {
                 NearItems.Remove(itemFixed);
                 ItemDistanceTo.RemoveItem(itemFixed.CurrentItem.NearItems, this);
-            }
-        }
-        public void SplitNearItems()
-        {
-            foreach(var type in Types)
-            {
-                if(type.IsImpossible && !(type.Sequence is Items.Single))
-                {
-                    if(type.Sequence is Items.Line)
-                    {
-                        if (type.Sequence.items.First().Equals(this) || type.Sequence.items.Last().Equals(this))
-                            break;
-                    }
-                    try
-                    {
-                        Ray nextRay = new Ray(CurrentPoint, Next.CurrentPoint);
-                        Ray previousRay = new Ray(Previous.CurrentPoint, CurrentPoint);
-                        bool orietntation = true;
-                        foreach (var item in NearItems)
-                        {
-                            if (previousRay.IsCross(nextRay))
-                            {
-                                if (previousRay.OnRight(item.CurrentItem.CurrentPoint) != nextRay.OnRight(item.CurrentItem.CurrentPoint))
-                                {
-
-                                    NearItemsPart_2.Add(item);
-                                }
-                                else
-                                {
-                                    NearItemsPart_1.Add(item);
-                                }
-                            }
-                            else
-                            {
-                                if (nextRay.OnRight(item.CurrentItem.CurrentPoint) == orietntation)
-                                {
-                                    NearItemsPart_1.Add(item);
-                                }
-                                else
-                                {
-                                    NearItemsPart_2.Add(item);
-                                }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Проблемы с разделением ближайших точек");
-                    }
-
-                }
-                else
-                {
-                    NearItemsPart_1 = NearItemsPart_2 = NearItems;
-                }
             }
         }
         public override bool Equals(Object point)
@@ -275,16 +226,45 @@ namespace Go.Items
             }
             return points;
         }
+        public void DrawCircle()
+        {
+
+            Graphics g = _form.GetPictureBox.CreateGraphics();
+            g.DrawEllipse(new Pen(Color.DarkBlue, 1), CurrentPoint.X - CurrentCircle.radius, CurrentPoint.Y - CurrentCircle.radius, CurrentCircle.radius * 2, CurrentCircle.radius * 2);
+        }
     }
 
     public class ImpossibleItem : Item
     {
-        public Item itemLeft, itemRight;
+        public Item itemInner, itemOuter;
 
-        public ImpossibleItem(List<Item> allItems, Form1 form, Point point, TypeItem typeLeft, TypeItem typeRight) : base(point)
+        public ImpossibleItem(List<Item> allItems, Form1 form, TypeItem generalType, TypeItem typeInner, TypeItem typeOuter) : base(generalType.Sequence.items[generalType.Sequence.items.Count - 2].CurrentPoint)
         {
-            itemLeft = new Item(allItems, form, new Point(point.X - 10, point.Y), typeLeft);
-            itemRight = new Item(allItems, form, new Point(point.X + 10, point.Y), typeRight);
+            itemInner = new Item(allItems, form, TakePoint(generalType.Sequence.items, true), typeInner, generalType);
+            itemOuter = new Item(allItems, form, TakePoint(generalType.Sequence.items, false), typeOuter, generalType);
+            
+        }
+
+        private Point TakePoint(List<Item> generalItems, bool isInner)
+        {
+            //if (isInner)
+            //    return new Point(generalItems[generalItems.Count - 2].CurrentPoint.X - 5, generalItems[generalItems.Count - 2].CurrentPoint.Y);
+            //else
+            //    return new Point(generalItems[generalItems.Count - 2].CurrentPoint.X + 5, generalItems[generalItems.Count - 2].CurrentPoint.Y);
+            if (generalItems.Count > 2)
+            {
+                Ray beforeRay = new Ray(generalItems[generalItems.Count - 3].CurrentPoint, generalItems[generalItems.Count - 2].CurrentPoint);
+                Ray afterRay = new Ray(generalItems[generalItems.Count - 2].CurrentPoint, generalItems[generalItems.Count - 1].CurrentPoint);
+                Ray parallelBeforeRay = beforeRay.GetParallelRay(5.0f, isInner);
+                Ray parallelAfterRay = afterRay.GetParallelRay(5.0f, isInner);
+
+                return parallelBeforeRay.Cross(parallelAfterRay);
+
+                //Ray ray = new Ray(generalItems[generalItems.Count - 3].CurrentPoint, newPoint);
+                //Circle circle = new Circle(generalItems[generalItems.Count - 2].CurrentPoint, 5);
+                //return circle.Cross(ray, isInner);
+            }
+            return Point.Empty;
         }
     }
 

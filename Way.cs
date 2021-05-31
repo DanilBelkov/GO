@@ -39,20 +39,19 @@ namespace Go
             return null;
         }
 
-        public bool findPointAStar(List<Item_A_Star> list, Item_A_Star point)
+        public bool FindPointAStar_ID(List<Item_A_Star> list, Item_A_Star point)
         {
-            foreach(Item_A_Star item in list)
+            foreach(Item_A_Star itemAStar in list)
             {
-                if (item.item.Equals(point.item))
+                if (itemAStar.item.ID == point.item.ID)
                     return true;
             }
             return false;
         }
-        public void FindWay(Item start, Item end, TypeItem startType)
+        public void FindWay(Item start, Item finish, TypeItem startType)
         {   
             List<int> overcomes = new List<int>();
             TypeItem _tempType = startType;
-            bool first = true;
             ///////// основой карты всегда белая область(лес)
             //overcomes.Add(startOvercome);
             Item_A_Star _tempPoint;//= new Point_A_Star();
@@ -69,7 +68,7 @@ namespace Go
             try
             {
                 //пока текущий не стал конечным
-                while (!_curentStar.item.Equals(end))
+                while (!_curentStar.item.Equals(finish))
                 {
                     //записываем в просмотренные
                     visitedPointGraph.Add(_curentStar);
@@ -95,12 +94,12 @@ namespace Go
                         //}
 
 
-                        _tempPoint.heuristic = item.CurrentItem.GetDistanceTo(end);
+                        _tempPoint.heuristic = item.CurrentItem.GetDistanceTo(finish);
                         _tempPoint.finallyDistance = _tempPoint.currentDistance + _tempPoint.heuristic;
                         _tempPoint.previousStar = _curentStar;
 
-                        //смотрим есть ли точка в каком-то из списков
-                        if (!findPointAStar(visitedPointGraph, _tempPoint) && !findPointAStar(openPoinst, _tempPoint))
+                        //смотрим есть ли точка в каком-то из списков   !findPointAStar(visitedPointGraph, _tempPoint) && !findPointAStar(openPoinst, _tempPoint)
+                        if (!FindPointAStar_ID(visitedPointGraph, _tempPoint))
                         {
                             //записываем в открытый список
                             openPoinst.Add(_tempPoint);
@@ -121,6 +120,10 @@ namespace Go
                             _curentStar = star;
                         }
                     }
+                    //if(_curentStar.item.NearItems.Exists(x => x.CurrentItem.Equals(_curentStar.previousStar.previousStar)))
+                    //{
+
+                    //}
                     //добавляем "скобку"
                     //overcomes.Add(_curP.starPoint.overcome);
                     // если это "скобка закрывает, то удаляем", то есть мы вошли и вышли из одной области

@@ -69,7 +69,7 @@ namespace Go.Items
 
         public override bool Cross(Ray ray, bool withEdge)
         {
-            if (ray.Include(items.First().CurrentPoint) && items.First().CurrentPoint != ray.to_P)
+            if (ray.Include(items.First().CurrentPoint, withEdge))
                 return true;
 
             return false;
@@ -162,7 +162,8 @@ namespace Go.Items
                     if (ray.IsCross(newRay))
                     {
                         Point crossPoint = ray.Cross(newRay);
-                        if (newRay.ContainsInner(crossPoint, withEdge) && ray.ContainsInner(crossPoint, withEdge))
+                        if (!(crossPoint == items.First().CurrentPoint || crossPoint == items.Last().CurrentPoint) && 
+                            newRay.ContainsInner(crossPoint, !withEdge) && ray.ContainsInner(crossPoint, withEdge))
                             return true;
                     }
                 }
@@ -209,7 +210,7 @@ namespace Go.Items
                     if (ray.IsCross(newRay))
                     {
                         Point crossPoint = ray.Cross(newRay);
-                        if (newRay.ContainsInner(crossPoint, withEdge) && ray.ContainsInner(crossPoint, withEdge))
+                        if (newRay.ContainsInner(crossPoint, !withEdge) && ray.ContainsInner(crossPoint, withEdge))
                             return true;
                     }
                 }
@@ -219,7 +220,7 @@ namespace Go.Items
                 if (ray.IsCross(newRay))
                 {
                     Point crossPoint = ray.Cross(newRay);
-                    if (ray.ContainsInner(crossPoint, withEdge) && newRay.ContainsInner(crossPoint, withEdge))
+                    if (ray.ContainsInner(crossPoint, withEdge) && newRay.ContainsInner(crossPoint, !withEdge))
                         return true;
                 }
             }

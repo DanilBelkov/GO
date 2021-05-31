@@ -56,17 +56,6 @@ namespace Go.Items
             return new Lake();
         }
     }
-    public class Pond : Hydrography // пруд
-    {
-        public Pond() : base("Pond", 80)
-        {
-            Sequence = new Items.Area();
-        }
-        override public TypeItem GetCopy()
-        {
-            return new Pond();
-        }
-    }
     public class ImpassableSwamp : Hydrography
     {
         public ImpassableSwamp() : base("ImpassableSwamp", 0)
@@ -111,6 +100,17 @@ namespace Go.Items
         override public TypeItem GetCopy()
         {
             return new ImpassableRiver();
+        }
+    }
+    public class River : Hydrography
+    {
+        public River() : base("River", 80)
+        {
+            Sequence = new Items.Line();
+        }
+        override public TypeItem GetCopy()
+        {
+            return new River();
         }
     }
     public class DisappearRiver : Hydrography
